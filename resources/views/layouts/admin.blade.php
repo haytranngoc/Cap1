@@ -78,8 +78,6 @@
                                 <li><a href="#">Subject</a></li>
                                 <li role="separator" class="divider"></li>
                                 <li><a href="#">Subject Set</a></li>
-                                <li role="separator" class="divider"></li>
-                                <li><a href="#">Specialized</a></li>
                             </ul>
                         </li>
                     </ul>

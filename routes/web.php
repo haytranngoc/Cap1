@@ -53,12 +53,8 @@ Route::get('/schools/{id}/edit', 'Admin\SchoolController@edit')->name('adminScho
 Route::put('/schools/{id}', 'Admin\SchoolController@update')->name('adminSchoolsUpdate');
 Route::get('/schools/{id}/delete', 'Admin\SchoolController@destroy')->name('adminSchoolsDelete');
 
-/*Route::get('/ajaxSelectCountry', 'Admin\CountryController@select');
-Route::get('/ajaxSelectCity', 'Admin\CityController@selectCity');*/
-
 Route::get('/ajaxCity', 'Admin\CityController@select');
 Route::get('/ajaxWard', 'Admin\WardController@select');
-
 
 
 // Route::get('/form', 'CountryController@showForm');
