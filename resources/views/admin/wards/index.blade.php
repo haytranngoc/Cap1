@@ -22,9 +22,9 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($wards as $ward)
+                            @foreach($wards as $index => $ward)
                                 <tr>
-                                    <td>{{ $ward->id }}</td>
+                                    <td>{{ $index + 1 }}</td>
                                     <td>{{ $ward->name }}</td>
                                     <td>{{ $ward->city->country->name }}</td>
                                     <td>{{ $ward->city->name }}</td>

@@ -23,9 +23,9 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($schools as $school)
+                            @foreach($schools as $index => $school)
                                 <tr>
-                                    <td>{{ $school->id }}</td>
+                                    <td>{{ $index + 1 }}</td>
                                     <td>{{ $school->name }}</td>
                                     <td>{{ $school->ward->city->country->name }}</td>
                                     <td>{{ $school->ward->city->name }}</td>

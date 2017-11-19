@@ -20,8 +20,9 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($roles as $role)
+                            @foreach($roles as $index => $role)
                                 <tr>
+                                    <td>{{ $index + 1 }}</td>
                                     <td>{{ $role->name }}</td>
                                     <td class="text-right">
                                       <a href="{{ route('adminRolesEdit', ['id' => $role->id] ) }}"><button class="btn btn-xs btn-primary">Edit</button></a>

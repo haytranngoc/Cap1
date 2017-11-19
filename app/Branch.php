@@ -8,6 +8,7 @@ class Branch extends Model
 {
     protected $fillable = ['branch_code', 'name'];
 
+    /*protected $guarded = ['id'];*/
     public function candidates()
     {
     	return $this->hasMany('App\Candidate');
@@ -18,8 +19,8 @@ class Branch extends Model
     	return $this->hasMany('App\Specialized');
     }
 
-    public function brach_subject_sets()
+    public function sets()
     {
-    	return $this->hasMany('App\Branch_Subject_Set');
+    	return $this->belongsToMany('App\Set', 'branch_sets', 'branch_id', 'set_id')->withTimestamps();
     }
 }

@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Post_Image extends Model
+class PostImage extends Model
 {
     protected $fillable = ['image', 'name', 'post_id'];
 

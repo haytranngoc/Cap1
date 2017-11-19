@@ -65,19 +65,21 @@
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Student <span class="caret"></span></a>
                             <ul class="dropdown-menu">
-                                <li><a href="#">Candidate</a></li>
+                                <li><a href="{{ route('adminCandidates') }}">Candidate</a></li>
                                 <li role="separator" class="divider"></li>
-                                <li><a href="#">Apply Type</a></li>
+                                <li><a href="{{ route('adminCandidateTypes') }}">Candidate Type</a></li>
                                 <li role="separator" class="divider"></li>
-                                <li><a href="#">Area</a></li>
+                                <li><a href="{{ route('adminApplies') }}">Apply Type</a></li>
                                 <li role="separator" class="divider"></li>
-                                <li><a href="#">Branch</a></li>
+                                <li><a href="{{ route('adminAreas') }}">Area</a></li>
                                 <li role="separator" class="divider"></li>
-                                <li><a href="#">Specialized</a></li>
+                                <li><a href="{{ route('adminBranches') }}">Branch</a></li>
                                 <li role="separator" class="divider"></li>
-                                <li><a href="#">Subject</a></li>
+                                <li><a href="{{ route('adminSpecializeds') }}">Specialized</a></li>
                                 <li role="separator" class="divider"></li>
-                                <li><a href="#">Subject Set</a></li>
+                                <li><a href="{{ route('adminSubjects') }}">Subject</a></li>
+                                <li role="separator" class="divider"></li>
+                                <li><a href="{{ route('adminSets') }}">Subject Set</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -108,6 +110,9 @@
                                 </a>
 
                                 <ul class="dropdown-menu" role="menu">
+                                    <li>
+                                        <a href="{{ route('profile') }}"><i class="fa fa-btn fa-user"></i>Profile</a>
+                                    </li>
                                     <li>
                                         <a href="{{ route('logout') }}"
                                             onclick="event.preventDefault();

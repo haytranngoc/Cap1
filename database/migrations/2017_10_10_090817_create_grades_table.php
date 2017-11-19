@@ -14,11 +14,14 @@ class CreateGradesTable extends Migration
     public function up()
     {
         Schema::create('grades', function (Blueprint $table) {
-            $table->increments('id');
             $table->unsignedInteger('candidate_id');
             $table->unsignedInteger('subject_id');
-            $table->double('point');
+            $table->float('point')->default(0);
+            $table->foreign('candidate_id')->references('id')->on('candidates')->onDelete('cascade');
+            $table->foreign('subject_id')->references('id')->on('subjects')->onDelete('cascade');
             $table->timestamps();
+            $table->index('candidate_id');
+            $table->index('subject_id');
         });
     }
 

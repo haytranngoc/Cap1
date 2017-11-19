@@ -70,4 +70,10 @@ class SchoolController extends Controller
         School::destroy($id);
         return redirect()->route('adminSchools');
     }
+
+    /*public function select(Request $request)
+    {
+        $schools = School::where('ward_id', $request->id)->get();
+        return $schools;
+    }*/
 }

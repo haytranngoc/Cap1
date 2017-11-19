@@ -15,11 +15,13 @@ class CityController extends Controller
         $cities = City::all();
         return view('admin.cities.index')->with('cities', $cities);
     }
+
     public function create()
     {
         $countries = Country::pluck('name', 'id');
         return view('admin.cities.create')->with('countries', $countries);
     }
+
     public function store(Request $request)
     {
         $this->validate($request, [
@@ -29,12 +31,14 @@ class CityController extends Controller
         City::create($request->all());
         return redirect()->route('adminCities');
     }
+
     public function edit($id)
     {
         $city = City::findOrFail($id);
         $countries = Country::pluck('name', 'id');
         return view('admin.cities.edit')->with('city', $city)->with('countries', $countries);
     }
+
     public function update(Request $request, $id)
     {
         $this->validate($request, [
@@ -45,6 +49,7 @@ class CityController extends Controller
         $city->update($request->all());
         return redirect()->route('adminCities');
     }
+    
     public function destroy($id)
     {
         City::destroy($id);

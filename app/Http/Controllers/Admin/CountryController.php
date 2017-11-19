@@ -13,10 +13,12 @@ class CountryController extends Controller
         $countries = Country::all();
         return view('admin.countries.index')->with('countries', $countries);
     }
+
     public function create()
     {
         return view('admin.countries.create');
     }
+
     public function store(Request $request)
     {
         $this->validate($request, [
@@ -25,11 +27,13 @@ class CountryController extends Controller
         Country::create($request->all());
         return redirect()->route('adminCountries');
     }
+
     public function edit($id)
     {
         $country = Country::findOrFail($id);
         return view('admin.countries.edit')->with('country', $country);
     }
+
     public function update(Request $request, $id)
     {
         $this->validate($request, [
@@ -39,16 +43,17 @@ class CountryController extends Controller
         $country->update($request->all());
         return redirect()->route('adminCountries');
     }
+    
     public function destroy($id)
     {
         Country::destroy($id);
         return redirect()->route('adminCountries');
     }
 
-    public function select(Request $request)
+    /*public function select(Request $request)
     {
         $countries = Country::all();
         return $countries;
-    }
+    }*/
 
 }
