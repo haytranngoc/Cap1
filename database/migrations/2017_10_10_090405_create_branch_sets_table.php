@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateSubjectsSetTable extends Migration
+class CreateBranchSetsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,12 @@ class CreateSubjectsSetTable extends Migration
      */
     public function up()
     {
-        Schema::create('subjects_set', function (Blueprint $table) {
+        Schema::create('branch_sets', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
+            $table->unsignedInteger('set_id');
+            $table->unsignedInteger('branch_id');
+            $table->foreign('set_id')->references('id')->on('sets')->onDelete('cascade');
+            $table->foreign('branch_id')->references('id')->on('branches')->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -27,6 +30,6 @@ class CreateSubjectsSetTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('subjects_set');
+        Schema::dropIfExists('branch_sets');
     }
 }

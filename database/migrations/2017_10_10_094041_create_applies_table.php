@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateSpecializedTable extends Migration
+class CreateAppliesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,8 @@ class CreateSpecializedTable extends Migration
      */
     public function up()
     {
-        Schema::create('specialized', function (Blueprint $table) {
+        Schema::create('applies', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInteger('branch_id');
-            $table->string('specialized_code');
             $table->string('name');
             $table->timestamps();
         });
@@ -29,6 +27,6 @@ class CreateSpecializedTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('specialized');
+        Schema::dropIfExists('applies');
     }
 }

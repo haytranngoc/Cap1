@@ -15,18 +15,21 @@ class CreateCandidatesTable extends Migration
     {
         Schema::create('candidates', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('full_name');
-            $table->string('avatar')->nullable();
-            $table->tinyInteger('numbers_cmnd')->unique();
-            $table->date('graduation_year');
+            $table->string('avatar')->default('default.jpg');
+            $table->string('first_name')->nullable();
+            $table->string('last_name')->nullable();
+            $table->string('email')->unique();
+            $table->integer('phone_number');
+            $table->integer('numbers_cmnd')->unique();
+            $table->date('graduation_year')->nullable();
             $table->date('date_of_birth');
             $table->string('address')->nullable();
-            $table->unsignedInteger('apply_type_id');
-            $table->unsignedInteger('branch_id');
+            $table->boolean('confirmed')->default(false);
+            $table->unsignedInteger('apply_id');
             $table->unsignedInteger('candidate_type_id');
-            $table->unsignedInteger('subject_set_id');
             $table->unsignedInteger('area_id');
             $table->unsignedInteger('school_id');
+            $table->unsignedInteger('branch_id');
             $table->timestamps();
         });
     }

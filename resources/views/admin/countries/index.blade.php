@@ -20,9 +20,9 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($countries as $country)
+                            @foreach($countries as $index => $country)
                                 <tr>
-                                    <td>{{ $country->id }}</td>
+                                    <td>{{ $index + 1 }}</td>
                                     <td>{{ $country->name }}</td>
                                     <td class="text-right">
                                         <a href="{{ route('adminCountriesEdit', ['id' => $country->id] ) }}"><button class="btn btn-xs btn-primary">Edit</button></a>

@@ -4,9 +4,9 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Candidate_Type extends Model
+class CandidateType extends Model
 {
-    protected $fillable = ['name'];
+    protected $fillable = ['name', 'bonus_point'];
 
     public function candidates()
     {

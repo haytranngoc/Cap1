@@ -6,15 +6,15 @@ use Illuminate\Database\Eloquent\Model;
 
 class Subject extends Model
 {
-    protected $fillable = ['subject_set_id', 'name'];
+    protected $fillable = ['name'];
 
-    public function subject_set()
+    public function sets()
     {
-    	return $this->belongsTo('App\Subject_Set');
+    	return $this->belongsToMany('App\Set', 'subject_sets', 'set_id', 'subject_id')->withTimestamps();
     }
 
-    public function grades()
+    public function candidates()
     {
-    	return $this->hasMany('App\Grade');
+    	return $this->belongsToMany('App\Candidate', 'grades', 'candidate_id', 'subject_id')->withPivot('point')->withTimestamps();
     }
 }

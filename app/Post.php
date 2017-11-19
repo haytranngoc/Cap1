@@ -13,8 +13,8 @@ class Post extends Model
     	return $this->belongsTo('App\Category');
     }
 
-    public function post_images()
+    public function postImages()
     {
-    	return $this->hasMany('App\Post_Image');
+    	return $this->hasMany('App\PostImage');
     }
 }

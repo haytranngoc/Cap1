@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Area extends Model
 {
-    protected $fillable = ['name'];
+    protected $fillable = ['name', 'bonus_point'];
 
     public function candidates()
     {

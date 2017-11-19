@@ -21,9 +21,9 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($cities as $city)
+                            @foreach($cities as $index => $city)
                                 <tr>
-                                    <td>{{ $city->id }}</td>
+                                    <td>{{ $index + 1 }}</td>
                                     <td>{{ $city->name }}</td>
                                     @if (!empty($city->country))
                                     <td>{{ $city->country->name }}</td>

@@ -68,5 +68,9 @@ class WardController extends Controller
     {
         $wards = Ward::where('city_id', $request->id)->get();
         return $wards;
+        /*$wards = ward::where('city_id', $request->id)->get();
+        $schools = School::where('ward_id', $wards[0]['id'])->get();
+        $wards['schools'] = $schools;
+        return $wards;*/
     }
 }

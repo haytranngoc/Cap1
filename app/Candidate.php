@@ -3,48 +3,56 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Carbon\Carbon;
 
 class Candidate extends Model
 {
-    protected $fillable = ['full_name', 'avatar', 'numbers_cmnd', 'graduation_year', 'date_of_birth', 'address', 'apply_type_id', 'branch_id', 'candidate_type_id', 'subject_set_id', 'area_id', 'school_id'];
+    protected $fillable = ['first_name', 'last_name', 'avatar', 'email', 'phone_number', 'numbers_cmnd', 'graduation_year', 'date_of_birth', 'address', 'confirmed', 'apply_id', 'candidate_type_id', 'area_id', 'school_id', 'branch_id'];
     
     public function school()
     {
     	return $this->belongsTo('App\School');
     }
 
-    public function apply_type()
+    public function apply()
     {
-    	return $this->belongsTo('App\Apply_Type');
+    	return $this->belongsTo('App\Apply');
     }
 
     public function branch()
     {
-    	return $this->belongsTo('App\Brach');
+    	return $this->belongsTo('App\Branch');
     }
 
-    public function subject_set()
+    public function subjects()
     {
-    	return $this->belongsTo('App\Subject_Set');
+    	return $this->belongsToMany('App\Subject', 'grades', 'candidate_id', 'subject_id')->withPivot('point')->withTimestamps();
     }
 
-    public function grades()
+    public function candidateType()
     {
-    	return $this->hasMany('App\Grade');
+    	return $this->belongsTo('App\CandidateType');
     }
 
-    public function candidate_type()
+    public function candidateImages()
     {
-    	return $this->belongsTo('App\Candidate_Type');
-    }
-
-    public function candidate_images()
-    {
-    	return $this->hasMany('App\Candidate_Image');
+    	return $this->hasMany('App\CandidateImage');
     }
 
     public function area()
     {
     	return $this->belongsTo('App\Area');
+    }
+
+    public function getFullName()
+    {
+        $first_name = $this->getAttribute("first_name");
+        $last_name = $this->getAttribute("last_name");
+        return "{$first_name}, {$last_name}";
+    }
+
+    public function getDateOfBirthAttribute($value)
+    {
+        return Carbon::parse($value)->format('Y/m/d');
     }
 }

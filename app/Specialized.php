@@ -10,6 +10,6 @@ class Specialized extends Model
 
     public function branch()
     {
-    	return $this->belongsTo('App\Brach');
+    	return $this->belongsTo('App\Branch');
     }
 }

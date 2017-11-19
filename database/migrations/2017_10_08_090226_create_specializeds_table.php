@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateApplyTypesTable extends Migration
+class CreateSpecializedsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,10 @@ class CreateApplyTypesTable extends Migration
      */
     public function up()
     {
-        Schema::create('apply_types', function (Blueprint $table) {
+        Schema::create('specializeds', function (Blueprint $table) {
             $table->increments('id');
+            $table->unsignedInteger('branch_id');
+            $table->string('specialized_code');
             $table->string('name');
             $table->timestamps();
         });
@@ -27,6 +29,6 @@ class CreateApplyTypesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('apply_types');
+        Schema::dropIfExists('specializeds');
     }
 }
