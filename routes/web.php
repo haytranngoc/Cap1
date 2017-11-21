@@ -112,6 +112,7 @@ Route::post('/candidates', 'Admin\CandidateController@store')->name('adminCandid
 Route::get('/candidates/{id}/edit', 'Admin\CandidateController@edit')->name('adminCandidatesEdit');
 Route::put('/candidates/{id}', 'Admin\CandidateController@update')->name('adminCandidatesUpdate');
 Route::get('/candidates/{id}/delete', 'Admin\CandidateController@destroy')->name('adminCandidatesDelete');
+Route::post("upload", "Admin\CandidateController@upload")->name("upload");
 
 Route::get('/ajaxCity', 'Admin\CityController@select');
 Route::get('/ajaxWard', 'Admin\WardController@select');

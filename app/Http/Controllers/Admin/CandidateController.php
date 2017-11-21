@@ -15,6 +15,9 @@ use App\CandidateType;
 use App\Subject;
 use App\Branch;
 use App\Set;
+use App\Specialized;
+use Carbon\Carbon;
+
 
 class CandidateController extends Controller
 {
@@ -27,7 +30,14 @@ class CandidateController extends Controller
     public function show($id)
     {
         $candidate = Candidate::findOrFail($id);
-        return view('admin.candidates.show')->with('candidate', $candidate);
+        $candidateType = CandidateType::findOrFail($id);
+        $area = Area::findOrFail($id);
+        $total = $area->bonus_point + $candidateType->bonus_point;
+        foreach ($candidate->subjects as $subject) {
+            $total += $subject->pivot->point;
+        }
+        //dd($total);
+        return view('admin.candidates.show', compact("candidate", "total"));
     }
 
     public function create()
@@ -40,11 +50,11 @@ class CandidateController extends Controller
         $areas = Area::pluck('name', 'id');
         $candidateTypes = CandidateType::pluck('name', 'id');
         $subjects = Subject::all(['id', 'name']);
-        //$subjects = Subject::pluck('name', 'id');
         $branches = Branch::pluck('name', 'id');
         $sets = Set::pluck('name', 'id');
+        $specializeds = Specialized::pluck('name', 'id');
 
-        $data = compact('countries', 'cities', 'wards', 'schools', 'applies', 'areas', 'candidateTypes', 'subjects', 'branches', 'sets');
+        $data = compact('countries', 'cities', 'wards', 'schools', 'applies', 'areas', 'candidateTypes', 'subjects', 'branches', 'sets', 'specializeds');
         return view('admin.candidates.create', $data);
     }
 
@@ -54,15 +64,23 @@ class CandidateController extends Controller
             'first_name' => 'required|unique:candidates|max:255',
             'last_name' => 'required|unique:candidates|max:255',
             'email' => 'required|unique:candidates|email',
-            'phone_number' => 'required|numeric:candidates|max:15',
-            'numbers_cmnd' => 'required|numeric:candidates|max:11',
-            'date_of_birth' =>
+            'phone_number' => 'required|numeric:candidates',
+            'numbers_cmnd' => 'required|numeric:candidates',
+            'date_of_birth' => 'required|date:candidates',
         ]);
         $data = $request->only([
-            'first_name', 'last_name', 'email', 'phone_number', 'numbers_cmnd', 'date_of_birth','country_id', 'city_id', 'ward_id', 
+            'avatar', 'first_name', 'last_name', 'email', 'phone_number', 'numbers_cmnd', 'date_of_birth', 
+            'graduation_year', 'country_id', 'city_id', 'ward_id', 
             'school_id', 'apply_id', 'set_id', 'area_id', 'candidate_type_id',
-            'subject_id', 'branch_id'
+            'subject_id', 'branch_id', 'set_id', 'specialized_id'
         ]);
+        // $file = $request->file('avatar');
+        // if (!empty($file)) {
+        //     $data['avatar'] = str_slug(Carbon::now().'_'.$data['name'].'.'.$file->getClientOriginalExtension());
+        //     $file->move('upload', $data['avatar']);
+        // } else {
+        //     $data['avatar'] = 'default.jpg';
+        // }
         $candidate = Candidate::create($data);
         foreach ($request->points as $subject_id => $point) {
             $candidate->subjects()->attach($subject_id, ['point' => $point]);
@@ -75,4 +93,14 @@ class CandidateController extends Controller
         Candidate::destroy($id);
         return redirect()->route('adminCandidates');
     }
+
+    // public function upload(Request $request)
+    // {
+    //     if ($request->hasFile("photo")) {
+    //         $file = $request->file("photo");
+    //         $path = Uploader::image($file);
+    //         return view("fileupload", [ 'image' => $path ]);
+    //     }
+    //     return view("fileupload");
+    // }
 }

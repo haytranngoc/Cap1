@@ -18,4 +18,9 @@ class Set extends Model
     {
     	return $this->belongsToMany('App\Subject', 'subject_sets', 'set_id', 'subject_id')->withTimestamps();
     }
+
+    public function candidates()
+    {
+        return $this->hasMany('App\Candidate');
+    }
 }

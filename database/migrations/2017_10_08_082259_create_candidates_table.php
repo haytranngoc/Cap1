@@ -19,8 +19,8 @@ class CreateCandidatesTable extends Migration
             $table->string('first_name')->nullable();
             $table->string('last_name')->nullable();
             $table->string('email')->unique();
-            $table->integer('phone_number');
-            $table->integer('numbers_cmnd')->unique();
+            $table->bigInteger('phone_number');
+            $table->bigInteger('numbers_cmnd')->unique();
             $table->date('graduation_year')->nullable();
             $table->date('date_of_birth');
             $table->string('address')->nullable();
@@ -30,6 +30,8 @@ class CreateCandidatesTable extends Migration
             $table->unsignedInteger('area_id');
             $table->unsignedInteger('school_id');
             $table->unsignedInteger('branch_id');
+            $table->unsignedInteger('set_id');
+            $table->unsignedInteger('specialized_id');
             $table->timestamps();
         });
     }
