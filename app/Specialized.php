@@ -12,4 +12,9 @@ class Specialized extends Model
     {
     	return $this->belongsTo('App\Branch');
     }
+
+    public function candidates()
+    {
+    	return $this->hasMany('App\Candidate');
+    }
 }

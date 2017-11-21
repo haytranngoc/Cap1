@@ -21,6 +21,14 @@
                         </div>
                     @endif
                     {{ Form::open(['route' => 'adminCandidatesStore']) }}
+                        {{-- <div class="form-group">
+                            {!! Form::label('avatar', 'avatar') !!}
+                            <div class="form-controls">
+                                {{ Form::file('avatar', null, ['class'=>'form-control']) }}
+                            </div>
+                        </div>
+                        {{ Form::hidden('image') }} --}}
+
                         <div class="form-group">
                             {!! Form::label('first_name', 'First Name:') !!}
                             <div class="form-controls">
@@ -58,6 +66,12 @@
                             </div>
                         </div>
                         <div class="form-group">
+                            {!! Form::label('graduation_year', 'Graduation Year:') !!}
+                            <div class="form-controls">
+                                {{ Form::date('graduation_year', null, ['class'=>'form-control']) }}
+                            </div>
+                        </div>
+                        <div class="form-group">
                             {!! Form::label('address', 'Address:') !!}
                             <div class="form-controls">
                                 {{ Form::text('address', null, ['class'=>'form-control']) }}
@@ -73,6 +87,12 @@
                             {!! Form::label('branch_id', 'Branch Name') !!}
                             <div class="form-controls">
                                 {!! Form::select('branch_id', $branches, '10', ['class'=>'form-control', 'id' => 'branch_select']) !!}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            {!! Form::label('specialized_id', 'Specialized Name') !!}
+                            <div class="form-controls">
+                                {!! Form::select('specialized_id', $specializeds, '10', ['class'=>'form-control', 'id' => 'specialized_select']) !!}
                             </div>
                         </div>
                         <div class="form-group">
