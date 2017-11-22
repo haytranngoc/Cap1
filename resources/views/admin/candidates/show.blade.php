@@ -11,7 +11,7 @@
 
             <div class="panel-body">
                 <div >
-                    <h2><div><p>Status : {{ $candidate->confirmed }}</p></div></h2>
+                    <h2><div><p>Status : {{ $candidate->confirm->name }}</p></div></h2>
                     <div class="col-md-2">
                         <div><img src="/uploads/avatars/{{ $candidate->avatar }}" style="width:150px; height:150px; float:left; border-radius:2%;" ></div>
                     </div>

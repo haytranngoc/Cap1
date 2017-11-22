@@ -24,7 +24,7 @@ class CreateCandidatesTable extends Migration
             $table->date('graduation_year')->nullable();
             $table->date('date_of_birth');
             $table->string('address')->nullable();
-            $table->boolean('confirmed')->default(false);
+            $table->unsignedInteger('confirm_id');
             $table->unsignedInteger('apply_id');
             $table->unsignedInteger('candidate_type_id');
             $table->unsignedInteger('area_id');
