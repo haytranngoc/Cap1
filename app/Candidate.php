@@ -8,7 +8,7 @@ use Carbon\Carbon;
 class Candidate extends Model
 {
     protected $fillable = ['first_name', 'last_name', 'avatar', 'email', 'phone_number', 'numbers_cmnd', 
-    'graduation_year', 'date_of_birth', 'address', 'confirmed', 'apply_id', 'candidate_type_id', 'area_id', 
+    'graduation_year', 'date_of_birth', 'address', 'confirm_id', 'apply_id', 'candidate_type_id', 'area_id', 
     'school_id', 'branch_id', 'set_id', 'specialized_id'];
     
     public function school()
@@ -56,16 +56,15 @@ class Candidate extends Model
         return $this->belongsTo('App\Specialized');
     }
 
+    public function confirm()
+    {
+        return $this->belongsTo('App\Confirm');
+    }
+
     public function getFullName()
     {
         $first_name = $this->getAttribute("first_name");
         $last_name = $this->getAttribute("last_name");
         return "{$first_name}, {$last_name}";
     }
-
-    public function getDateOfBirthAttribute($value)
-    {
-        return Carbon::parse($value)->format('Y/m/d');
-    }
-
 }

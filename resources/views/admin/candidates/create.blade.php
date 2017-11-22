@@ -4,7 +4,7 @@
 <div class="container">
     <div class="row">
         <div class="col-md-4 panel panel-default">
-            <img src="/uploads/avatars/default.jpg" style="width:150px; height:150px; float:left; border-radius:50%; margin-right:25px;">
+            
         </div>
         <div class="col-md-8">
             <div class="panel panel-default">
@@ -20,15 +20,16 @@
                             </ul>
                         </div>
                     @endif
-                    {{ Form::open(['route' => 'adminCandidatesStore']) }}
-                        {{-- <div class="form-group">
-                            {!! Form::label('avatar', 'avatar') !!}
-                            <div class="form-controls">
-                                {{ Form::file('avatar', null, ['class'=>'form-control']) }}
+                    {{ Form::open(['route' => 'adminCandidatesStore', 'files' => true]) }}
+                        <div class="form-group">
+                            <div class="form-group">
+                                {!! Form::label('photo', 'Avatar') !!}
+                                <div class="form-controls">
+                                    {{ Form::file(('photo'), null, ['class'=>'form-control']) }}
+                                </div>
                             </div>
                         </div>
-                        {{ Form::hidden('image') }} --}}
-
+                        {{ Form::hidden('avatar')}}
                         <div class="form-group">
                             {!! Form::label('first_name', 'First Name:') !!}
                             <div class="form-controls">
@@ -126,6 +127,12 @@
                             {!! Form::label('candidate_type_id', 'Candidate Type') !!}
                             <div class="form-controls">
                                 {!! Form::select('candidate_type_id', $candidateTypes, null, ['class'=>'form-control']) !!}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            {!! Form::label('confirm_id', 'Status') !!}
+                            <div class="form-controls">
+                                {!! Form::select('confirm_id', $confirms, null, ['class'=>'form-control']) !!}
                             </div>
                         </div>
                         <div class="form-group">
