@@ -17,6 +17,7 @@ class CreateSpecializedsTable extends Migration
             $table->increments('id');
             $table->unsignedInteger('branch_id');
             $table->string('specialized_code');
+            $table->float('point')->default(0);
             $table->string('name');
             $table->timestamps();
         });

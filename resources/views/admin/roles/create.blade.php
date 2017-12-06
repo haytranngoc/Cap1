@@ -17,7 +17,7 @@
                             </ul>
                         </div>
                     @endif
-                    {{ Form::open(['route' => 'adminRolesStore']) }}
+                    {{ Form::open(['route' => 'admin.roles.store']) }}
                         <div class="form-group">
                             {!! Form::label('name', 'Role Name:') !!}
                             <div class="form-controls">
@@ -25,7 +25,7 @@
                             </div>
                         </div>
                         {!! Form::submit('Create', ['class'=>'btn btn-primary']) !!}
-                        <a href="{{ route('adminRoles')}}">Cancel</a>
+                        <a href="{{ route('admin.roles.index')}}">Cancel</a>
                     {{Form::close()}}
                 </div>
             </div>

@@ -26,7 +26,7 @@ class AreaController extends Controller
             'bonus_point' => 'required|numeric:areas|max:255',
         ]);
         Area::create($request->all());
-        return redirect()->route('adminAreas');
+        return redirect()->route('admin.areas.store');
     }
 
     public function edit($id)
@@ -43,12 +43,12 @@ class AreaController extends Controller
         ]);
         $area = Area::findOrFail($id);
         $area->update($request->all());
-        return redirect()->route('adminAreas');
+        return redirect()->route('admin.areas.index');
     }
     
     public function destroy($id)
     {
         Area::destroy($id);
-        return redirect()->route('adminAreas');
+        return redirect()->route('admin.areas.index');
     }
 }

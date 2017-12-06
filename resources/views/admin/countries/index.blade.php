@@ -7,7 +7,7 @@
             <div class="panel panel-default">
                 <div class="panel-heading">
                     List of countries
-                    <div class="pull-right"><a href="{{ route('adminCountriesCreate') }}"><button class="btn btn-xs btn-primary">Create new country</button></a></div>
+                    <div class="pull-right"><a href="{{ route('admin.countries.create') }}"><button class="btn btn-xs btn-primary">Create new country</button></a></div>
                 </div>
 
                 <div class="panel-body">
@@ -25,8 +25,8 @@
                                     <td>{{ $index + 1 }}</td>
                                     <td>{{ $country->name }}</td>
                                     <td class="text-right">
-                                        <a href="{{ route('adminCountriesEdit', ['id' => $country->id] ) }}"><button class="btn btn-xs btn-primary">Edit</button></a>
-                                        <a href="{{ route('adminCountriesDelete', ['id' => $country->id] ) }}" ><button class="btn btn-xs btn-danger">Delete</button></a>
+                                        <a href="{{ route('admin.countries.edit', ['id' => $country->id] ) }}"><button class="btn btn-xs btn-primary">Edit</button></a>
+                                        <a href="{{ route('admin.countries.destroy', ['id' => $country->id] ) }}" ><button class="btn btn-xs btn-danger">Delete</button></a>
                                     </td>
                                 </tr>
                             @endforeach

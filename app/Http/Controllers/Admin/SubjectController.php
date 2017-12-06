@@ -25,7 +25,7 @@ class SubjectController extends Controller
             'name' => 'required|unique:subjects|max:255',
         ]);
         Subject::create($request->all());
-        return redirect()->route('adminSubjects');
+        return redirect()->route('admin.subjects.index');
     }
 
     public function edit($id)
@@ -41,12 +41,12 @@ class SubjectController extends Controller
         ]);
         $subject = Subject::findOrFail($id);
         $subject->update($request->all());
-        return redirect()->route('adminSubjects');
+        return redirect()->route('admin.subjects.index');
     }
     
     public function destroy($id)
     {
         Subject::destroy($id);
-        return redirect()->route('adminSubjects');
+        return redirect()->route('admin.subjects.index');
     }
 }

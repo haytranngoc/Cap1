@@ -26,7 +26,7 @@ class CandidateTypeController extends Controller
             'bonus_point' => 'required|numeric:candidate_types|max:255',
         ]);
         CandidateType::create($request->all());
-        return redirect()->route('adminCandidateTypes');
+        return redirect()->route('admin.candidateTypes.index');
     }
 
     public function edit($id)
@@ -43,12 +43,12 @@ class CandidateTypeController extends Controller
         ]);
         $candidateType = CandidateType::findOrFail($id);
         $candidateType->update($request->all());
-        return redirect()->route('adminCandidateTypes');
+        return redirect()->route('admin.candidateTypes.index');
     }
     
     public function destroy($id)
     {
         CandidateType::destroy($id);
-        return redirect()->route('adminCandidateTypes');
+        return redirect()->route('admin.candidateTypes.index');
     }
 }

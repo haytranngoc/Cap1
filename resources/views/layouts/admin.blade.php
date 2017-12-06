@@ -7,11 +7,15 @@
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
-
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/lightbox.css') }}">
 </head>
 <body>
     <div id="app">
@@ -39,7 +43,7 @@
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">System <span class="caret"></span></a>
                             <ul class="dropdown-menu">
-                                <li><a href="{{route('adminRoles') }}">Roles</a></li>
+                                <li><a href="{{route('admin.roles.index') }}">Roles</a></li>
                                 <li role="separator" class="divider"></li>
                                 <li><a href="#">Users</a></li>
                             </ul>
@@ -50,13 +54,11 @@
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Location <span class="caret"></span></a>
                             <ul class="dropdown-menu">
-                                <li><a href="{{ route('adminCountries') }}">Country</a></li>
+                                <li><a href="{{ route('admin.countries.index') }}">Country</a></li>
                                 <li role="separator" class="divider"></li>
-                                <li><a href="{{ route('adminCities') }}">City</a></li>
+                                <li><a href="{{ route('admin.cities.index') }}">City</a></li>
                                 <li role="separator" class="divider"></li>
-                                <li><a href="{{ route('adminWards') }}">Ward</a></li>
-                                <li role="separator" class="divider"></li>
-                                <li><a href="{{ route('adminSchools') }}">School</a></li>
+                                <li><a href="{{ route('admin.schools.index') }}">School</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -65,21 +67,21 @@
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Student <span class="caret"></span></a>
                             <ul class="dropdown-menu">
-                                <li><a href="{{ route('adminCandidates') }}">Candidate</a></li>
+                                <li><a href="{{ route('admin.candidates.index') }}">Candidate</a></li>
                                 <li role="separator" class="divider"></li>
-                                <li><a href="{{ route('adminCandidateTypes') }}">Candidate Type</a></li>
+                                <li><a href="{{ route('admin.candidateTypes.index') }}">Candidate Type</a></li>
                                 <li role="separator" class="divider"></li>
-                                <li><a href="{{ route('adminApplies') }}">Apply Type</a></li>
+                                <li><a href="{{ route('admin.applies.index') }}">Apply Type</a></li>
                                 <li role="separator" class="divider"></li>
-                                <li><a href="{{ route('adminAreas') }}">Area</a></li>
+                                <li><a href="{{ route('admin.areas.index') }}">Area</a></li>
                                 <li role="separator" class="divider"></li>
-                                <li><a href="{{ route('adminBranches') }}">Branch</a></li>
+                                <li><a href="{{ route('admin.branches.index') }}">Branch</a></li>
                                 <li role="separator" class="divider"></li>
-                                <li><a href="{{ route('adminSpecializeds') }}">Specialized</a></li>
+                                <li><a href="{{ route('admin.specializeds.index') }}">Specialized</a></li>
                                 <li role="separator" class="divider"></li>
-                                <li><a href="{{ route('adminSubjects') }}">Subject</a></li>
+                                <li><a href="{{ route('admin.subjects.index') }}">Subject</a></li>
                                 <li role="separator" class="divider"></li>
-                                <li><a href="{{ route('adminSets') }}">Subject Set</a></li>
+                                <li><a href="{{ route('admin.sets.index') }}">Subject Set</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -111,7 +113,7 @@
 
                                 <ul class="dropdown-menu" role="menu">
                                     <li>
-                                        <a href="{{ route('profile') }}"><i class="fa fa-btn fa-user"></i>Profile</a>
+                                        <a href="{{ route('admin.profile') }}"><i class="fa fa-btn fa-user"></i>Profile</a>
                                     </li>
                                     <li>
                                         <a href="{{ route('logout') }}"
@@ -137,6 +139,7 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
-    @yield('script')
+    <script type="text/javascript" src="{{ asset('js/lightbox.min.js') }}"></script>
+    @yield('scripts')
 </body>
 </html>

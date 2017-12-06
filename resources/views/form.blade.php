@@ -14,17 +14,17 @@
         {{ csrf_field() }}
         <div class="form-group">
             <label>Select Country:</label>
-            <select class="form-control" name="country">
+            <select class="form-control" name="branch">
                 <option value="">---</option>
-                @foreach($countries as $country)
-                    <option value="{{ $country->id }}">{{ $country->name }}</option>
+                @foreach($branches as $branch)
+                    <option value="{{ $branch->id }}">{{ $branch->name }}</option>
                 @endforeach
             </select>
         </div>
 
         <div class="form-group">
-            <label>Select City:</label>
-            <select class="form-control" name="city">
+            <label>Select specialized:</label>
+            <select class="form-control" name="specialized">
             </select>
         </div>
 
@@ -36,21 +36,21 @@
 </div>
 
 <script type="text/javascript">
-    var url = "{{ url('/showCitiesInCountry') }}";
-    $("select[name='country']").change(function(){
-        var country_id = $(this).val();
+    var url = "{{ url('/select') }}";
+    $("select[name='branch']").change(function(){
+        var branch_id = $(this).val();
         var token = $("input[name='_token']").val();
         $.ajax({
             url: url,
             method: 'POST',
             data: {
-                country_id: country_id,
+                branch_id: branch_id,
                 _token: token
             },
             success: function(data) {
-                $("select[name='city'").html('');
+                $("select[name='specialized'").html('');
                 $.each(data, function(key, value){
-                    $("select[name='city']").append(
+                    $("select[name='specialized']").append(
                         "<option value=" + value.id + ">" + value.name + "</option>"
                     );
                 });

@@ -7,7 +7,7 @@
             <div class="panel panel-default">
                 <div class="panel-heading">
                     List of cities
-                    <div class="pull-right"><a href="{{ route('adminCitiesCreate') }}"><button class="btn btn-xs btn-primary">Create new city</button></a></div>
+                    <div class="pull-right"><a href="{{ route('admin.cities.create') }}"><button class="btn btn-xs btn-primary">Create new city</button></a></div>
                 </div>
 
                 <div class="panel-body">
@@ -29,8 +29,8 @@
                                     <td>{{ $city->country->name }}</td>
                                     @endif
                                     <td class="text-right">
-                                      <a href="{{ route('adminCitiesEdit', ['id' => $city->id] ) }}"><button class="btn btn-xs btn-primary">Edit</button></a>
-                                      <a href="{{ route('adminCitiesDelete', ['id' => $city->id] ) }}" ><button class="btn btn-xs btn-danger">Delete</button></a>
+                                      <a href="{{ route('admin.cities.edit', ['id' => $city->id] ) }}"><button class="btn btn-xs btn-primary">Edit</button></a>
+                                      <a href="{{ route('admin.cities.destroy', ['id' => $city->id] ) }}" ><button class="btn btn-xs btn-danger">Delete</button></a>
                                     </td>
                                 </tr>
                             @endforeach

@@ -15,7 +15,9 @@ class CreateCandidateImagesTable extends Migration
     {
         Schema::create('candidate_images', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('image');
+            $table->unsignedInteger('candidate_id')->unsigned();
+            $table->foreign('candidate_id')->references('id')->on('candidates')->onDelete('cascade');
+            $table->string('image')->nullable();
             $table->timestamps();
         });
     }

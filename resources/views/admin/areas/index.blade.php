@@ -7,7 +7,7 @@
             <div class="panel panel-default">
                 <div class="panel-heading">
                     List of areas
-                    <div class="pull-right"><a href="{{ route('adminAreasCreate') }}"><button class="btn btn-xs btn-primary">Create new area</button></a></div>
+                    <div class="pull-right"><a href="{{ route('admin.areas.create') }}"><button class="btn btn-xs btn-primary">Create new area</button></a></div>
                 </div>
 
                 <div class="panel-body">
@@ -27,8 +27,8 @@
                                     <td>{{ $area->name }}</td>
                                     <td>{{ $area->bonus_point }}</td>
                                     <td class="text-right">
-                                        <a href="{{ route('adminAreasEdit', ['id' => $area->id] ) }}"><button class="btn btn-xs btn-primary">Edit</button></a>
-                                        <a href="{{ route('adminAreasDelete', ['id' => $area->id] ) }}" ><button class="btn btn-xs btn-danger">Delete</button></a>
+                                        <a href="{{ route('admin.areas.edit', ['id' => $area->id] ) }}"><button class="btn btn-xs btn-primary">Edit</button></a>
+                                        <a href="{{ route('admin.areas.destroy', ['id' => $area->id] ) }}" ><button class="btn btn-xs btn-danger">Delete</button></a>
                                     </td>
                                 </tr>
                             @endforeach

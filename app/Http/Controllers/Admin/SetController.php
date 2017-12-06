@@ -29,7 +29,7 @@ class SetController extends Controller
         /*$set = new Set();*/
         $set = Set::create($request->all()); 
         $set->subjects()->attach($request->subjects);
-        return redirect()->route('adminSets');
+        return redirect()->route('admin.sets.index');
     }
 
     public function edit($id)
@@ -45,13 +45,13 @@ class SetController extends Controller
         ]);
         $set = Set::findOrFail($id);
         $set->update($request->all());
-        return redirect()->route('adminSets');
+        return redirect()->route('admin.sets.index');
     }
     
     public function destroy($id)
     {
         Set::destroy($id);
-        return redirect()->route('adminSets');
+        return redirect()->route('admin.sets.index');
     }
 
     /*public function select(Request $request)

@@ -7,7 +7,7 @@
             <div class="panel panel-default">
                 <div class="panel-heading">
                     List of roles
-                    <div class="pull-right"><a href="{{ route('adminRolesCreate') }}"><button class="btn btn-xs btn-primary">Create new role</button></a></div>
+                    <div class="pull-right"><a href="{{ route('admin.roles.create') }}"><button class="btn btn-xs btn-primary">Create new role</button></a></div>
                 </div>
 
                 <div class="panel-body">
@@ -25,8 +25,8 @@
                                     <td>{{ $index + 1 }}</td>
                                     <td>{{ $role->name }}</td>
                                     <td class="text-right">
-                                      <a href="{{ route('adminRolesEdit', ['id' => $role->id] ) }}"><button class="btn btn-xs btn-primary">Edit</button></a>
-                                      <a href="{{ route('adminRolesDelete', ['id' => $role->id] ) }}" ><button class="btn btn-xs btn-danger">Delete</button></a>
+                                      <a href="{{ route('admin.roles.edit', ['id' => $role->id] ) }}"><button class="btn btn-xs btn-primary">Edit</button></a>
+                                      <a href="{{ route('admin.roles.destroy', ['id' => $role->id] ) }}" ><button class="btn btn-xs btn-danger">Delete</button></a>
                                     </td>
                                 </tr>
                             @endforeach

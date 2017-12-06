@@ -11,112 +11,135 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-Route::get('profile', 'Admin\UserController@profile')->name('profile');
-Route::post('profile', 'Admin\UserController@update_avatar');
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
-
-Route::get('/roles', 'Admin\RoleController@index')->name('adminRoles');
-Route::get('/roles/{id}/edit', 'Admin\RoleController@edit')->name('adminRolesEdit');
-Route::put('/roles/{id}', 'Admin\RoleController@update')->name('adminRolesUpdate');
-Route::get('/roles/create', 'Admin\RoleController@create')->name('adminRolesCreate');
-Route::post('/roles', 'Admin\RoleController@store')->name('adminRolesStore');
-Route::get('/roles/{id}/delete', 'Admin\RoleController@destroy')->name('adminRolesDelete');
-
-Route::get('/countries', 'Admin\CountryController@index')->name('adminCountries');
-Route::get('/countries/create', 'Admin\CountryController@create')->name('adminCountriesCreate');
-Route::post('/countries', 'Admin\CountryController@store')->name('adminCountriesStore');
-Route::get('/countries/{id}/edit', 'Admin\CountryController@edit')->name('adminCountriesEdit');
-Route::put('/countries/{id}', 'Admin\CountryController@update')->name('adminCountriesUpdate');
-Route::get('/countries/{id}/delete', 'Admin\CountryController@destroy')->name('adminCountriesDelete');
-
-Route::get('/cities', 'Admin\CityController@index')->name('adminCities');
-Route::get('/cities/create', 'Admin\CityController@create')->name('adminCitiesCreate');
-Route::post('/cities', 'Admin\CityController@store')->name('adminCitiesStore');
-Route::get('/cities/{id}/edit', 'Admin\CityController@edit')->name('adminCitiesEdit');
-Route::put('/cities/{id}', 'Admin\CityController@update')->name('adminCitiesUpdate');
-Route::get('/cities/{id}/delete', 'Admin\CityController@destroy')->name('adminCitiesDelete');
-
-Route::get('/wards', 'Admin\WardController@index')->name('adminWards');
-Route::get('/wards/create', 'Admin\WardController@create')->name('adminWardsCreate');
-Route::post('/wards', 'Admin\WardController@store')->name('adminWardsStore');
-Route::get('/wards/{id}/edit', 'Admin\WardController@edit')->name('adminWardsEdit');
-Route::put('/wards/{id}', 'Admin\WardController@update')->name('adminWardsUpdate');
-Route::get('/wards/{id}/delete', 'Admin\WardController@destroy')->name('adminWardsDelete');
-
-Route::get('/schools', 'Admin\SchoolController@index')->name('adminSchools');
-Route::get('/schools/create', 'Admin\SchoolController@create')->name('adminSchoolsCreate');
-Route::post('/schools', 'Admin\SchoolController@store')->name('adminSchoolsStore');
-Route::get('/schools/{id}/edit', 'Admin\SchoolController@edit')->name('adminSchoolsEdit');
-Route::put('/schools/{id}', 'Admin\SchoolController@update')->name('adminSchoolsUpdate');
-Route::get('/schools/{id}/delete', 'Admin\SchoolController@destroy')->name('adminSchoolsDelete');
-
-Route::get('/areas', 'Admin\AreaController@index')->name('adminAreas');
-Route::get('/areas/create', 'Admin\AreaController@create')->name('adminAreasCreate');
-Route::post('/areas', 'Admin\AreaController@store')->name('adminAreasStore');
-Route::get('/areas/{id}/edit', 'Admin\AreaController@edit')->name('adminAreasEdit');
-Route::put('/areas/{id}', 'Admin\AreaController@update')->name('adminAreasUpdate');
-Route::get('/areas/{id}/delete', 'Admin\AreaController@destroy')->name('adminAreasDelete');
-
-Route::get('/branches', 'Admin\BranchController@index')->name('adminBranches');
-Route::get('/branches/create', 'Admin\BranchController@create')->name('adminBranchesCreate');
-Route::post('/branches', 'Admin\BranchController@store')->name('adminBranchesStore');
-Route::get('/branches/{id}/edit', 'Admin\BranchController@edit')->name('adminBranchesEdit');
-Route::put('/branches/{id}', 'Admin\BranchController@update')->name('adminBranchesUpdate');
-Route::get('/branches/{id}/delete', 'Admin\BranchController@destroy')->name('adminBranchesDelete');
+Route::get('/', 'HomeController@index')->name('home');
+Route::get('/candidates/create', 'CandidateController@create')->name('candidatesCreate');
+Route::post('/candidates', 'CandidateController@store')->name('candidatesStore');
+Route::get('/candidates/branches', 'CandidateController@branches')->name('candidates.branches');
+Route::get('/candidates/subjects', 'CandidateController@subjects')->name('candidates.subjects');
+Route::get('/upload', 'CandidateController@uploadForm');
+Route::post('/upload', 'CandidateController@uploadSubmit');
 
 
-Route::get('/specializeds', 'Admin\SpecializedController@index')->name('adminSpecializeds');
-Route::get('/specializeds/create', 'Admin\SpecializedController@create')->name('adminSpecializedsCreate');
-Route::post('/specializeds', 'Admin\SpecializedController@store')->name('adminSpecializedsStore');
-Route::get('/specializeds/{id}/edit', 'Admin\SpecializedController@edit')->name('adminSpecializedsEdit');
-Route::put('/specializeds/{id}', 'Admin\SpecializedController@update')->name('adminSpecializedsUpdate');
-Route::get('/specializeds/{id}/delete', 'Admin\SpecializedController@destroy')->name('adminSpecializedsDelete');
+$admin_config = [
+    "prefix"     => "admin",
+    "namespace"  => "Admin",
+    "as"         => "admin.",
+    "middleware" => "admin",
+];
 
-Route::get('/sets', 'Admin\SetController@index')->name('adminSets');
-Route::get('/sets/create', 'Admin\SetController@create')->name('adminSetsCreate');
-Route::post('/sets', 'Admin\SetController@store')->name('adminSetsStore');
-Route::get('/sets/{id}/edit', 'Admin\SetController@edit')->name('adminSetsEdit');
-Route::put('/sets/{id}', 'Admin\SetController@update')->name('adminSetsUpdate');
-Route::get('/sets/{id}/delete', 'Admin\SetController@destroy')->name('adminSetsDelete');
+Route::group($admin_config, function () {
+	Route::get('/', 'AdminController@index')->name('index');
+	Route::get('profile', 'UserController@profile')->name('profile');
+	Route::post('profile', 'UserController@update_avatar');
 
-Route::get('/subjects', 'Admin\SubjectController@index')->name('adminSubjects');
-Route::get('/subjects/create', 'Admin\SubjectController@create')->name('adminSubjectsCreate');
-Route::post('/subjects', 'Admin\SubjectController@store')->name('adminSubjectsStore');
-Route::get('/subjects/{id}/edit', 'Admin\SubjectController@edit')->name('adminSubjectsEdit');
-Route::put('/subjects/{id}', 'Admin\SubjectController@update')->name('adminSubjectsUpdate');
-Route::get('/subjects/{id}/delete', 'Admin\SubjectController@destroy')->name('adminSubjectsDelete');
+	Route::resource("roles", "RoleController");
 
-Route::get('/applies', 'Admin\ApplyController@index')->name('adminApplies');
-Route::get('/applies/create', 'Admin\ApplyController@create')->name('adminAppliesCreate');
-Route::post('/applies', 'Admin\ApplyController@store')->name('adminAppliesStore');
-Route::get('/applies/{id}/edit', 'Admin\ApplyController@edit')->name('adminAppliesEdit');
-Route::put('/applies/{id}', 'Admin\ApplyController@update')->name('adminAppliesUpdate');
-Route::get('/applies/{id}/delete', 'Admin\ApplyController@destroy')->name('adminAppliesDelete');
+	Route::get('/categories', 'CategoryController@index')->name('categories.index');
+	Route::post('/categories', 'CategoryController@store')->name('categories.store');
+	Route::get('/categories/{id}/delete', 'CategoryController@destroy')->name('categories.destroy');
 
-Route::get('/candidateTypes', 'Admin\CandidateTypeController@index')->name('adminCandidateTypes');
-Route::get('/candidateTypes/create', 'Admin\CandidateTypeController@create')->name('adminCandidateTypesCreate');
-Route::post('/candidateTypes', 'Admin\CandidateTypeController@store')->name('adminCandidateTypesStore');
-Route::get('/candidateTypes/{id}/edit', 'Admin\CandidateTypeController@edit')->name('adminCandidateTypesEdit');
-Route::put('/candidateTypes/{id}', 'Admin\CandidateTypeController@update')->name('adminCandidateTypesUpdate');
-Route::get('/candidateTypes/{id}/delete', 'Admin\CandidateTypeController@destroy')->name('adminCandidateTypesDelete');
+	Route::resource("tags", "TagController");
 
-Route::get('/candidates', 'Admin\CandidateController@index')->name('adminCandidates');
-Route::get('/candidates/{id}/show', 'Admin\CandidateController@show')->name('adminCandidatesShow');
-Route::get('/candidates/create', 'Admin\CandidateController@create')->name('adminCandidatesCreate');
-Route::post('/candidates', 'Admin\CandidateController@store')->name('adminCandidatesStore');
-Route::get('/candidates/{id}/edit', 'Admin\CandidateController@edit')->name('adminCandidatesEdit');
-Route::put('/candidates/{id}', 'Admin\CandidateController@update')->name('adminCandidatesUpdate');
-Route::get('/candidates/{id}/delete', 'Admin\CandidateController@destroy')->name('adminCandidatesDelete');
-Route::post("upload", "Admin\CandidateController@upload")->name("upload");
+	Route::resource('posts', 'PostController');
 
-Route::get('/ajaxCity', 'Admin\CityController@select');
-Route::get('/ajaxWard', 'Admin\WardController@select');
-Route::get('/ajaxSet', 'Admin\SetController@select');
+
+	Route::get('/countries', 'CountryController@index')->name('countries.index');
+	Route::get('/countries/create', 'CountryController@create')->name('countries.create');
+	Route::post('/countries', 'CountryController@store')->name('countries.store');
+	Route::get('/countries/{id}/edit', 'CountryController@edit')->name('countries.edit');
+	Route::put('/countries/{id}', 'CountryController@update')->name('countries.update');
+	Route::get('/countries/{id}/delete', 'CountryController@destroy')->name('countries.destroy');
+
+	Route::get('/cities', 'CityController@index')->name('cities.index');
+	Route::get('/cities/create', 'CityController@create')->name('cities.create');
+	Route::post('/cities', 'CityController@store')->name('cities.store');
+	Route::get('/cities/{id}/edit', 'CityController@edit')->name('cities.edit');
+	Route::put('/cities/{id}', 'CityController@update')->name('cities.update');
+	Route::get('/cities/{id}/delete', 'CityController@destroy')->name('cities.destroy');
+
+	Route::get('/schools', 'SchoolController@index')->name('schools.index');
+	Route::get('/schools/create', 'SchoolController@create')->name('schools.create');
+	Route::post('/schools', 'SchoolController@store')->name('schools.store');
+	Route::get('/schools/{id}/edit', 'SchoolController@edit')->name('schools.edit');
+	Route::put('/schools/{id}', 'SchoolController@update')->name('schools.update');
+	Route::get('/schools/{id}/delete', 'SchoolController@destroy')->name('schools.destroy');
+
+	Route::get('/areas', 'AreaController@index')->name('areas.index');
+	Route::get('/areas/create', 'AreaController@create')->name('areas.create');
+	Route::post('/areas', 'AreaController@store')->name('areas.store');
+	Route::get('/areas/{id}/edit', 'AreaController@edit')->name('areas.edit');
+	Route::put('/areas/{id}', 'AreaController@update')->name('areas.update');
+	Route::get('/areas/{id}/delete', 'AreaController@destroy')->name('areas.destroy');
+
+	Route::get('/branches', 'BranchController@index')->name('branches.index');
+	Route::get('/branches/create', 'BranchController@create')->name('branches.create');
+	Route::post('/branches', 'BranchController@store')->name('branches.store');
+	Route::get('/branches/{id}/edit', 'BranchController@edit')->name('branches.edit');
+	Route::put('/branches/{id}', 'BranchController@update')->name('branches.update');
+	Route::get('/branches/{id}/delete', 'BranchController@destroy')->name('branches.destroy');
+
+
+	Route::get('/specializeds', 'SpecializedController@index')->name('specializeds.index');
+	Route::get('/specializeds/create', 'SpecializedController@create')->name('specializeds.create');
+	Route::post('/specializeds', 'SpecializedController@store')->name('specializeds.store');
+	Route::get('/specializeds/{id}/edit', 'SpecializedController@edit')->name('specializeds.edit');
+	Route::put('/specializeds/{id}', 'SpecializedController@update')->name('specializeds.update');
+	Route::get('/specializeds/{id}/delete', 'SpecializedController@destroy')->name('specializeds.destroy');
+
+	Route::get('/sets', 'SetController@index')->name('sets.index');
+	Route::get('/sets/create', 'SetController@create')->name('sets.create');
+	Route::post('/sets', 'SetController@store')->name('sets.store');
+	Route::get('/sets/{id}/edit', 'SetController@edit')->name('sets.edit');
+	Route::put('/sets/{id}', 'SetController@update')->name('sets.update');
+	Route::get('/sets/{id}/delete', 'SetController@destroy')->name('sets.destroy');
+
+	Route::get('/subjects', 'SubjectController@index')->name('subjects.index');
+	Route::get('/subjects/create', 'SubjectController@create')->name('subjects.create');
+	Route::post('/subjects', 'SubjectController@store')->name('subjects.store');
+	Route::get('/subjects/{id}/edit', 'SubjectController@edit')->name('subjects.edit');
+	Route::put('/subjects/{id}', 'SubjectController@update')->name('subjects.update');
+	Route::get('/subjects/{id}/delete', 'SubjectController@destroy')->name('subjects.destroy');
+
+	Route::get('/applies', 'ApplyController@index')->name('applies.index');
+	Route::get('/applies/create', 'ApplyController@create')->name('applies.create');
+	Route::post('/applies', 'ApplyController@store')->name('applies.store');
+	Route::get('/applies/{id}/edit', 'ApplyController@edit')->name('applies.edit');
+	Route::put('/applies/{id}', 'ApplyController@update')->name('applies.update');
+	Route::get('/applies/{id}/delete', 'ApplyController@destroy')->name('applies.destroy');
+
+	Route::get('/candidateTypes', 'CandidateTypeController@index')->name('candidateTypes.index');
+	Route::get('/candidateTypes/create', 'CandidateTypeController@create')->name('candidateTypes.create');
+	Route::post('/candidateTypes', 'CandidateTypeController@store')->name('candidateTypes.store');
+	Route::get('/candidateTypes/{id}/edit', 'CandidateTypeController@edit')->name('candidateTypes.edit');
+	Route::put('/candidateTypes/{id}', 'CandidateTypeController@update')->name('candidateTypes.update');
+	Route::get('/candidateTypes/{id}/delete', 'CandidateTypeController@destroy')->name('candidateTypes.destroy');
+
+	Route::get('/candidates', 'CandidateController@index')->name('candidates.index');
+	Route::get('/candidates/confirmed', 'CandidateController@showConfirm')->name('candidates.showConfirmed');
+	Route::get('/candidates/unconfirmed', 'CandidateController@showUnconfirm')->name('candidates.showUnconfirmed');
+	Route::get('/candidates/{id}/show', 'CandidateController@show')->name('candidates.show');
+	Route::get('/candidates/create', 'CandidateController@create')->name('candidates.create');
+	Route::post('/candidates', 'CandidateController@store')->name('candidates.store');
+	Route::get('/candidates/{id}/edit', 'CandidateController@edit')->name('candidates.edit');
+	Route::put('/candidates/{id}', 'CandidateController@update')->name('candidates.update');
+	Route::get('/candidates/{id}/delete', 'CandidateController@destroy')->name('candidates.destroy');
+	Route::get('/candidates/{id}', 'CandidateController@getPDF')->name('candidates.getPDF');
+
+
+});
+Route::get('blog/{slug}', ['as' => 'blog.single', 'uses' => 'BlogController@getSingle'])->where('slug', '[\w\d\-\_]+');
+Route::get('blog', ['uses' => 'BlogController@getIndex', 'as' => 'blog.index']);
+
+Route::get('/ajaxCity', 'CityController@select');
+Route::get('/ajaxSchool', 'SchoolController@select');
+Route::get('/ajaxSpecialized', 'CandidateController@select');
+
 /*Route::get('/ajaxSchool', 'Admin\SchoolController@select');*/
 
 

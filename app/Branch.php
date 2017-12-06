@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Branch extends Model
 {
-    protected $fillable = ['branch_code', 'name'];
+    protected $fillable = ['branch_code', 'name', 'point'];
 
     /*protected $guarded = ['id'];*/
     public function candidates()

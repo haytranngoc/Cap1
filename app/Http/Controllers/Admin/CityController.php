@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Country;
 use App\City;
-use App\Ward;
+use App\School;
 use App\Http\Controllers\Controller;
 
 class CityController extends Controller
@@ -29,7 +29,7 @@ class CityController extends Controller
             'country_id' => 'required|numeric|exists:countries,id',
         ]);
         City::create($request->all());
-        return redirect()->route('adminCities');
+        return redirect()->route('admin.cities.index');
     }
 
     public function edit($id)
@@ -47,20 +47,20 @@ class CityController extends Controller
         ]);
         $city = City::findOrFail($id);
         $city->update($request->all());
-        return redirect()->route('adminCities');
+        return redirect()->route('admin.cities.index');
     }
     
     public function destroy($id)
     {
         City::destroy($id);
-        return redirect()->route('adminCities');
+        return redirect()->route('admin.cities.index');
     }
 
     public function select(Request $request)
     {
         $cities = City::where('country_id', $request->id)->get();
-        $wards = Ward::where('city_id', $cities[0]['id'])->get();
-        $cities['wards'] = $wards;
+        $schools = School::where('city_id', $cities[0]['id'])->get();
+        $cities['schools'] = $schools;
         return $cities;
     }
 
