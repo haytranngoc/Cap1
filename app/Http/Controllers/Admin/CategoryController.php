@@ -24,12 +24,12 @@ class CategoryController extends Controller
         $category->name = $request->name;
         $category->save();
         Session::flash('success', 'New Category has been created');
-        return redirect()->route('adminCategories');
+        return redirect()->route('admin.categories.index');
     }
 
     public function destroy($id)
     {
         Category::destroy($id);
-        return redirect()->route('adminCategories');
+        return redirect()->route('admin.categories.index');
     } 
 }

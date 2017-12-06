@@ -20,7 +20,7 @@
 							<th>{{ $index + 1 }}</th>
 							<td>{{ $category->name }}</td>
 							<td class="text-right">
-	                            <a href="{{ route('adminCategoriesDelete', ['id' => $category->id] ) }}" ><button class="btn btn-xs btn-danger">Delete</button></a>
+	                            <a href="{{ route('admin.categories.destroy', ['id' => $category->id] ) }}" ><button class="btn btn-xs btn-danger">Delete</button></a>
 	                        </td>
 						</tr>
 						@endforeach
@@ -30,7 +30,7 @@
 
 			<div class="col-md-3">
 				<div class="well">
-					{!! Form::open(['route' => 'adminCategoriesStore', 'method' => 'POST']) !!}
+					{!! Form::open(['route' => 'admin.categories.store', 'method' => 'POST']) !!}
 						<h2>New Category</h2>
 						{{ Form::label('name', 'Name:') }}
 						{{ Form::text('name', null, ['class' => 'form-control']) }}
