@@ -10,6 +10,7 @@
                 <p>Show of Canidates <span style="color:red;">{{ $mes }}</span></p>
                 <p><b>Created At: </b>{{ $candidate->created_at }}</p>
                 <p><b>Update At: </b>{{ $candidate->updated_at }}</p>
+                {{-- <a href="{{ route("admin.candidates.active") }}"><button >Active</button></a> --}}
             </div>
 
             <div class="panel-body">

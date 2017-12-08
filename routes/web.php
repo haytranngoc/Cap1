@@ -38,6 +38,7 @@ Route::group($admin_config, function () {
 	Route::get('profile', 'UserController@profile')->name('profile');
 	Route::post('profile', 'UserController@update_avatar');
 
+	Route::get('users', 'UserController@index')->name('users.index');
 	Route::resource("roles", "RoleController");
 
 	Route::get('/categories', 'CategoryController@index')->name('categories.index');
@@ -130,6 +131,7 @@ Route::group($admin_config, function () {
 	Route::put('/candidates/{id}', 'CandidateController@update')->name('candidates.update');
 	Route::get('/candidates/{id}/delete', 'CandidateController@destroy')->name('candidates.destroy');
 	Route::get('/candidates/{id}', 'CandidateController@getPDF')->name('candidates.getPDF');
+	Route::post('/active', 'CandidateController@active')->name('candidates.active');
 
 
 });

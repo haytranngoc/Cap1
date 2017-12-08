@@ -65,7 +65,7 @@ class Candidate extends Model
     {
         $first_name = $this->getAttribute("first_name");
         $last_name = $this->getAttribute("last_name");
-        return "{$first_name}, {$last_name}";
+        return "{$first_name} {$last_name}";
     }
 
     public function status()
@@ -77,4 +77,14 @@ class Candidate extends Model
         }
         return "Uncofirmed";
     }
+
+    // public function active()
+    // {
+    //     $confirm = $this->getAttribute("confirm");
+    //     if($confirm = false)
+    //     {
+    //         return $confirm = true;
+    //     }
+    //     return $confirm;
+    // }
 }

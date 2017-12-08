@@ -36,7 +36,7 @@
 								<td>{{ $post->title }}</td>
 								<td>{{ substr(strip_tags($post->body), 0, 50) }}{{ strlen(strip_tags($post->body)) > 50 ? "..." : "" }}</td>
 								<td>{{ date('M j, Y', strtotime($post->created_at)) }}</td>
-								<td><a href="{{ route('admin.posts.show', $post->id) }}" class="btn btn-default btn-sm">View</a> <a href="{{ route('posts.edit', $post->id) }}" class="btn btn-default btn-sm">Edit</a></td>
+								<td><a href="{{ route('admin.posts.show', $post->id) }}" class="btn btn-default btn-sm">View</a> <a href="{{ route('admin.posts.edit', $post->id) }}" class="btn btn-default btn-sm">Edit</a></td>
 							</tr>
 
 						@endforeach

@@ -5,16 +5,39 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\User;
+use App\Role;
 use File;
 use Auth;
 use Image;
 
 class UserController extends Controller
 {
+    public function index()
+    {
+        $users = User::all();
+        return view("admin.users.index")->with("users", $users);
+    }
+
+    public function edit($id)
+    {
+        $user = User::findOrFail($id);
+        $role = Role::findOrFail($user);
+        return view('admin.users.edit')->with('user', $user)
+                ->with('role', $role);
+    }
+
+    public function update()
+    {
+        $user = User::findOrFail($id);
+        $user->update($request->all());
+        return redirect()->route('admin.users.index');
+    }
+
     public function profile()
     {
-    	return view('profile', array('user' => Auth::user()) );
+        return view('profile', array('user' => Auth::user()) );
     }
+
 
     public function update_avatar(Request $request)
     {

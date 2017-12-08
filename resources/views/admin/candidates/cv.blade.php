@@ -7,44 +7,49 @@
 	<title></title>
 	<link rel="stylesheet" href="">
 <style>
-.page-break {
-    page-break-after: always;
+body {
+	font-family: DejaVu Sans;
+	line-height: 1.7em;
 }
+h2
+	{
+		text-align: center;
+	}
 </style>
 
 </head>
 <body>
 	<div class="container">
 		
-		<h1>Lý lich sinh viên</h1>
+		<h2>Giấy Báo Nhập Học</h2>
 		<table class="table table-bordered" >
 			<tr>
-				<td><b>Ho va ten</b></td>
-				<td><b>Ngay Sinh</b></td>
-				<td><b>Noi Sinh</b></td>
+				<td><b>Họ và tên:</b> {{ $candidate->getFullName() }}</td>
 			</tr>
 			<tr>
-				<td><b>Gioi Tinh</b></td>
-				<td><b>Dan Toc</b></td>
-				<td><b>Ton Gia</b></td>
+				<td><b>Sinh Ngày: </b>{{ $candidate->date_of_birth }}</td>
+				<td><b>Địa chỉ thường trú: </b>{{ $candidate->address }}</td>
 			</tr>
 			<tr>
-				<td>Số CMND:</td>
-				<td>Ngày cấp:</td>
-				<td>Nơi cấp:</td>
+				<td><b>Số CMND: </b>{{ $candidate->numbers_cmnd }}</td>
 			</tr>
 			<tr>
-				<td>Số điện thoại liên lạc:</td>
-				<td>Email:</td>
+				<td><b>Đối tượng: </b>{{ $candidate->candidateType->name }}</td>
+				<td><b>Khu vực ưu tiên: </b>{{ $candidate->area->name }}</td>
+				
 			</tr>
 			<tr>
-				<td>Năm trúng tuyển:</td>
-				<td>Ngành đăng ký học:</td>
+				<td><b>Ngành xét tuyển: </b>{{ $candidate->branch->name }}</td>
+				<td><b>Khối thi: </b>{{ $candidate->set->name }}</td>
+				<td><b>Chuyên Ngành: </b>{{ $candidate->specialized->name }}</td>
 			</tr>
 			<tr>
-				<td>Nơi đăng ký hộ khẩu:Số nhà:.............</td>
-				<td>Đường:.............................tổ </td>
-				<td>D/p(thôn):.............</td>
+				@foreach ($candidate->subjects as $subject)
+                    <td><b>{{ $subject->name }} : </b>{{ $subject->pivot->point }}</td>
+                @endforeach
+			</tr>
+			<tr>
+				<td><b>Tổng điểm: </b>{{ $total }}</td>
 			</tr>
 	    </table>
 	</div>

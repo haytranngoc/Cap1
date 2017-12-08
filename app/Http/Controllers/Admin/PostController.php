@@ -51,7 +51,7 @@ class PostController extends Controller
         $post->save();
         $post->tags()->sync($request->tags, false);
         Session::flash('success', 'The blog post was successfully save!');
-        return redirect()->route('posts.show', $post->id);
+        return redirect()->route('admin.posts.show', $post->id);
     }
 
     public function show($id)
@@ -117,7 +117,7 @@ class PostController extends Controller
         // set flash data with success message
         Session::flash('success', 'This post was successfully saved.');
         // redirect with flash data to posts.show
-        return redirect()->route('posts.show', $post->id);
+        return redirect()->route('admin.posts.show', $post->id);
     }
     /**
      * Remove the specified resource from storage.
@@ -131,6 +131,6 @@ class PostController extends Controller
         $post->tags()->detach();
         $post->delete();
         Session::flash('success', 'The post was successfully deleted.');
-        return redirect()->route('posts.index');
+        return redirect()->route('admin.posts.index');
     }
 }

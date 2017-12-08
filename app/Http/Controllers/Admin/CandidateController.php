@@ -70,6 +70,23 @@ class CandidateController extends Controller
         return view('admin.candidates.uncofirm')->with('candidates', $candidates);
     }
 
+    // public function active()
+    // {
+    //     $candidate = Candidate::findOrFail($id);
+    //     $active = $candidate->confirm;
+    //     if($active = false)
+    //     {
+    //         $active = true;
+    //     }
+    //     else
+    //     {
+    //         $active = false;
+    //     }
+    //     dd($active);
+    //     redirect()->route('admin.candidates.index'); 
+
+    // }
+
     public function create()
     {
     	$countries = Country::pluck('name', 'id');
