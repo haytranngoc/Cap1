@@ -14,9 +14,5 @@ class CountriesTableSeeder extends Seeder
         DB::table('countries')->insert([
             'name' => 'VietNam',
         ]);
-
-        DB::table('countries')->insert([
-            'name' => 'USA',
-        ]);
     }
 }

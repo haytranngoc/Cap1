@@ -35,6 +35,12 @@
                                 {{ Form::text('point', $branch->point, ['class'=>'form-control']) }}
                             </div>
                         </div>
+                        <div class="form-group">
+                            {!! Form::label('sets', 'Subject Set:') !!}
+                            <div class="form-controls">
+                                {{ Form::select('sets[]', $sets, null, ['id' => 'sets', 'multiple' => 'multiple', 'class'=>'form-control']) }}
+                            </div>
+                        </div>
                         {{ Form::submit('Update', ['class'=>'btn btn-primary']) }}
                         <a href="{{ route('admin.branches.index')}}">Cancel</a>
                     {{Form::close()}}

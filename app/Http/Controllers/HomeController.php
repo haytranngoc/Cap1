@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Type;
+use App\Post;
+use App\Category;
 
 class HomeController extends Controller
 {
@@ -24,6 +25,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $posts = Post::paginate(10);
+        $categories = Category::all();
+        return view('home')->with('posts', $posts)->with('categories', $categories);
     }
 }

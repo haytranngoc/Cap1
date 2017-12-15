@@ -70,23 +70,6 @@ class CandidateController extends Controller
         return view('admin.candidates.uncofirm')->with('candidates', $candidates);
     }
 
-    // public function active()
-    // {
-    //     $candidate = Candidate::findOrFail($id);
-    //     $active = $candidate->confirm;
-    //     if($active = false)
-    //     {
-    //         $active = true;
-    //     }
-    //     else
-    //     {
-    //         $active = false;
-    //     }
-    //     dd($active);
-    //     redirect()->route('admin.candidates.index'); 
-
-    // }
-
     public function create()
     {
     	$countries = Country::pluck('name', 'id');
@@ -114,7 +97,13 @@ class CandidateController extends Controller
             'phone_number' => 'required|numeric:candidates|regex:/(0)[0-9]{9}/',
             'numbers_cmnd' => 'required|numeric:candidates|digits_between:9,12',
             'date_of_birth' => 'required|date:candidates',
-            'photo' => 'required|image|mimes:jpeg,bmp,jpg,png,gif|max:2000'
+            'photo' => 'required|image|mimes:jpeg,bmp,jpg,png,gif|max:2000',
+            'branch_id' => 'required',
+            'specialized_id' => 'required',
+            'set_id' => 'required',
+            'date_of_birth' => 'required|date|before:tomorrow',
+            'graduation_year' => 'required|digits:4|integer|min:1900|max:'.(date('Y')),
+
         ]);
         $data = $request->only([
             'avatar', 'first_name', 'last_name', 'email', 'phone_number', 'numbers_cmnd', 'date_of_birth', 
@@ -122,6 +111,7 @@ class CandidateController extends Controller
             'school_id', 'apply_id', 'set_id', 'area_id', 'candidate_type_id',
             'subject_id', 'branch_id', 'set_id', 'specialized_id', 'confirm', 'address'
         ]);
+
         $file = $request->file('photo');
         if ($request->hasFile('photo')) {
             $data['avatar'] = str_slug(Carbon::now().'_'.$data['first_name'].'.'.$file->getClientOriginalExtension());
@@ -129,6 +119,7 @@ class CandidateController extends Controller
         } else {
             $data['avatar'] = 'default.jpg';
         }
+
         $candidate = Candidate::create($data);
         foreach ($request->points as $subject_id => $point) {
             $candidate->subjects()->attach($subject_id, ['point' => $point]);
@@ -136,17 +127,60 @@ class CandidateController extends Controller
         return redirect()->route('admin.candidates.index');
     }
 
-    // public function edit($id)
-    // {
-    //     $candidate = Candidate::findOrFail($id);
-    //     $countries = Country::pluck('name', 'id');
-    //     $cities = City::pluck('name', 'id');
-    //     $schools = School::pluck('name', 'id');
-    //     $apply = Apply::findOrFail($candidate->apply_id);
-    //     $area = Area::findOrFail($candidate->area_id);
-    //     $candidateType = CandidateType::findOrFail($candidate->candidate_type_id);
+    public function edit($id)
+    {
+        $candidate = Candidate::findOrFail($id);
+        $countries = Country::pluck('name', 'id');
+        $cities = City::pluck('name', 'id');
+        $schools = School::pluck('name', 'id');
+        $applies = Apply::pluck('name', 'id');
+        $areas = Area::pluck('name', 'id');
+        $candidateTypes = CandidateType::pluck('name', 'id');
+        $subjects = Subject::all(['id', 'name']);
+        $branches = Branch::all(['name', 'id']);
+        $sets = Set::all(['name', 'id']);
+        $specializeds = Specialized::all(['name', 'id']);
+        $data = compact('candidate', 'countries', 'cities', 'schools', 'applies', 'areas', 'candidateTypes', 
+            'subjects', 'branches', 'sets', 'specializeds');
+        return view('admin.candidates.edit', $data);
+    }
+
+    public function update(Request $request, $id)
+    {
+        $this->validate($request, [
+            'first_name' => 'required|max:255,first_name'.$id,
+            'last_name' => 'required|max:255',
+            'phone_number' => 'required|numeric:candidates|regex:/(0)[0-9]{9}/',
+            'numbers_cmnd' => 'required|numeric:candidates|digits_between:9,12,numbers_cmnd',
+            'date_of_birth' => 'required|date:candidates',
+            'photo' => 'image|mimes:jpeg,bmp,jpg,png,gif|max:2000,avatar'.$id,
+            'branch_id' => 'required',
+            'specialized_id' => 'required',
+            'set_id' => 'required',
+            
+        ]);
+        $data = $request->only([
+            'avatar', 'first_name', 'last_name', 'email', 'phone_number', 'numbers_cmnd', 'date_of_birth', 
+            'graduation_year', 'country_id', 'city_id',
+            'school_id', 'apply_id', 'set_id', 'area_id', 'candidate_type_id',
+            'subject_id', 'branch_id', 'set_id', 'specialized_id', 'confirm', 'address'
+        ]);
+        $candidate = Candidate::findOrFail($id);
+        $file = $request->file('photo');
+        if ($request->hasFile('photo')) {
+            $data['avatar'] = str_slug(Carbon::now().'_'.$data['first_name'].'.'.$file->getClientOriginalExtension());
+            $file->move('uploads/avatars/', $data['avatar']);
+        } else {
+            $data['avatar'] = $candidate->avatar;
+        }
+        $candidate->update($data);
+        $candidate->subjects()->sync([]);
+        foreach ($request->points as $subject_id => $point) {
+            $candidate->subjects()->attach($subject_id, ['point' => $point]);
+        }
         
-    // }
+        return redirect()->route('admin.candidates.index');
+    }
 
 
     public function destroy($id)
@@ -169,4 +203,6 @@ class CandidateController extends Controller
         $pdf = PDF::loadView('admin.candidates.cv', compact("candidate", "total"));
         return $pdf->stream('cv.pdf');
     }
+
+    
 }

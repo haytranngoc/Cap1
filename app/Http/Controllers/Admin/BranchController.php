@@ -38,7 +38,7 @@ class BranchController extends Controller
     {
         $branch = Branch::findOrFail($id);
         $sets = Set::pluck('name', 'id');
-        return view('admin.branches.edit')->with('branch', $branch);
+        return view('admin.branches.edit')->with('branch', $branch)->with('sets', $sets);
     }
 
     public function update(Request $request, $id)

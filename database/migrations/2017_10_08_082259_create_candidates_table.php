@@ -21,7 +21,7 @@ class CreateCandidatesTable extends Migration
             $table->string('email')->unique();
             $table->string('phone_number');
             $table->bigInteger('numbers_cmnd')->unique();
-            $table->date('graduation_year')->nullable();
+            $table->string('graduation_year')->nullable();
             $table->date('date_of_birth');
             $table->string('address')->nullable();
             $table->boolean('confirm')->default(false);

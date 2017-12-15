@@ -29,14 +29,21 @@
                             @foreach($candidates as $index => $item)
                                 <tr>
                                     <td>{{ $index + 1 }}</td>
-                                    <td><img src="/uploads/avatars/{{ $item->avatar }}" style="width:50px; height:50px; float:left; border-radius:50%;" ></td>
+                                    <td><img src="/uploads/avatars/{{ $item->avatar }}" style="width:80px; height:80px; float:left; " ></td>
                                     <td>{{ $item->getFullName() }}</td>
                                     <td>{{ $item->email }}</td>
-                                    <td>{{ $item->created_at }}</td>
+                                    <td>{{ date('M j, Y', strtotime($item->created_at)) }}</td>
                                     <td class="text-right">
                                         <a href="{{ route("admin.candidates.show", $item->id) }}"><button class="btn btn-xs btn-success">View</button></a>
                                         <a href="{{ route('admin.candidates.edit', ['id' => $item->id] ) }}"><button class="btn btn-xs btn-primary">Edit</button></a>
                                         <a href="{{ route('admin.candidates.destroy', ['id' => $item->id] ) }}" ><button class="btn btn-xs btn-danger">Delete</button></a>
+                                        @if($item->confirm)
+                                        <i class="glyphicon glyphicon-ok" style="color:green;"></i>
+                                        @else
+                                        <i class="glyphicon glyphicon-remove" style="color:red"></i>
+                                        @endif
+                                        
+
                                     </td>
                                 </tr>
                             @endforeach

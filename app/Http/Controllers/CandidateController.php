@@ -72,6 +72,11 @@ class CandidateController extends Controller
             'numbers_cmnd' => 'required|unique:candidates|numeric:candidates|digits_between:9,12',
             'date_of_birth' => 'required|date:candidates',
             'photo' => 'required|image|mimes:jpeg,bmp,jpg,png,gif|max:2000',
+            'branch_id' => 'required|numeric|exists:candidates,id',
+            'specialized_id' => 'required|numeric|exists:candidates,id',
+            'set_id' => 'required|numeric|exists:candidates,id',
+            'date_of_birth' => 'required|date|before:tomorrow',
+            'graduation_year' => 'required|digits:4|integer|min:1900|max:'.(date('Y')),
         ]);
         $data = $request->only([
             'avatar', 'first_name', 'last_name', 'email', 'phone_number', 'numbers_cmnd', 'date_of_birth', 

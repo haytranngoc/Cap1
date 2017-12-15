@@ -3,13 +3,13 @@
 @section('content')
 <div class="container">
     <div class="row">
-        {{ Form::open(['route' => 'admin.candidates.store', 'files' => true]) }}
+        {{ Form::open(['route' => ['admin.candidates.update', $candidate->id], 'method' => 'put', 'files' => true]) }}
         <div class="col-md-12">
             <div class="panel panel-default">
                 <div class="panel-heading">
                 Create Candidate
                         <div class="form-controls">
-                            {!! Form::select('confirm',[true => 'Confirm', false => 'Unconfirm' ], null, ['class'=>'form-control']) !!}
+                            {!! Form::select('confirm',[true => 'Confirm', false => 'Unconfirm' ], $candidate->confirm, ['class'=>'form-control']) !!}
                         </div>
                 </div>
 
@@ -30,52 +30,56 @@
                                 {{ Form::file(('photo'), null, ['class'=>'form-control']) }}
                             </div>
                         </div>
+                        <div class="form-group">
+                            <div class="form-controls">
+                                <img style="width:150px; height:150px; float:left; border-radius:2%;" src="/uploads/avatars/{{ $candidate->avatar }}" >
+                                {{ Form::hidden('avatar', $candidate->avatar) }}
+                            </div>
+                        </div>
                     </div>
                     <div class="col-md-4">
-
-                        {{ Form::hidden('avatar')}}
                         <div class="form-group">
                             {!! Form::label('first_name', 'First Name:') !!}
                             <div class="form-controls">
-                                {{ Form::text('first_name', null, ['class'=>'form-control']) }}
+                                {{ Form::text('first_name', $candidate->first_name, ['class'=>'form-control']) }}
                             </div>
                         </div>
                         <div class="form-group">
                             {!! Form::label('last_name', 'Last Name:') !!}
                             <div class="form-controls">
-                                {{ Form::text('last_name', null, ['class'=>'form-control']) }}
+                                {{ Form::text('last_name', $candidate->last_name, ['class'=>'form-control']) }}
                             </div>
                         </div>
                         
                         <div class="form-group">
                             {!! Form::label('email', 'Email:') !!}
                             <div class="form-controls">
-                                {{ Form::text('email', null, ['class'=>'form-control']) }}
+                                {{ Form::text('email', $candidate->email, ['class'=>'form-control']) }}
                             </div>
                         </div>
                         <div class="form-group">
                             {!! Form::label('phone_number', 'Phone Number:') !!}
                             <div class="form-controls">
-                                {{ Form::text('phone_number', null, ['class'=>'form-control']) }}
+                                {{ Form::text('phone_number', $candidate->phone_number, ['class'=>'form-control']) }}
                             </div>
                         </div>
                         <div class="form-group">
                             {!! Form::label('numbers_cmnd', 'Number Identity Card:') !!}
                             <div class="form-controls">
-                                {{ Form::text('numbers_cmnd', null, ['class'=>'form-control']) }}
+                                {{ Form::text('numbers_cmnd', $candidate->numbers_cmnd, ['class'=>'form-control']) }}
                             </div>
                         </div>
                         <div class="form-group">
                             {!! Form::label('date_of_birth', 'Date of birth:') !!}
                             <div class="form-controls">
-                                {{ Form::date('date_of_birth', null, ['class'=>'form-control']) }}
+                                {{ Form::date('date_of_birth', $candidate->date_of_birth, ['class'=>'form-control']) }}
                             </div>
                         </div>
                         
                         <div class="form-group">
                             {!! Form::label('address', 'Address:') !!}
                             <div class="form-controls">
-                                {{ Form::text('address', null, ['class'=>'form-control']) }}
+                                {{ Form::text('address', $candidate->address , ['class'=>'form-control']) }}
                             </div>
                         </div>
                         <div class="form-group">
@@ -86,7 +90,7 @@
                         </div>
                         <div class="form-group">
                            <label >Branch Name</label>
-                           <select name="branch_id" id="branch_id" class="form-control">
+                           <select name="branch_id" id="branch_id" required class="form-control">
                                <option value="">Choose</option>
                                 @foreach($branches as $branch)
                                     <option value="{{ $branch->id }}">{{ $branch->name }}</option>
@@ -95,7 +99,7 @@
                         </div>
                         <div class="form-group">
                             <label >Specizaled Name</label>
-                           <select name="specialized_id" id="specialized_id" class="form-control">
+                           <select name="specialized_id" required id="specialized_id" class="form-control">
                                <option value="">Choose</option>
                            </select>
                         </div>
@@ -119,106 +123,28 @@
                                 {!! Form::select('country_id', $countries, null, ['class'=>'form-control', 'id' => 'country_select']) !!}
                             </div>
                         </div>
-                        <script>
-                            window.onload = function(){
-                                var _token = $('input[name="_token"]').val();
-                                $('#city_select').empty();
-                                var id = $('#country_select').val();
-                                $.ajax({
-                                    type: 'get',
-                                    url: "/ajaxCity",
-                                    data: {'id' : id ,
-                                            '_token' : _token},
-                                    success: function(data){
-                                        var schools = data['schools'];
-                                        delete data['schools'];
-                                        $.each(data, function(i,n) {
-                                            $('#city_select').append("<option value="+n.id+">"+n.name+"</option>");
-                                        });
-                                        $.each(schools, function(i,n) {
-                                            $('#school_select').append("<option value="+n.id+">"+n.name+"</option>");
-                                        });
-                                    },
-                                    error: function(data){
-                                        alert("fail" + ' ' +data)
-                                    },
-                                });
-                            }
-                        </script>
                         <div class="form-group">
                             {!! Form::label('city_id', 'City') !!}
                             <div class="form-controls">
                                 {!! Form::select('city_id', $cities, null, ['class'=>'form-control', 'id' => 'city_select']) !!}
                             </div>
                         </div>
-                        <script type="text/javascript" src="http://code.jquery.com/jquery-2.1.0.min.js"></script>
-                        <script>
-                            $(document).ready(function() {
-                                var _token = $('input[name="_token"]').val();
-                                $('#country_select').change(function() {
-                                    $('#city_select').empty();
-                                    $('#school_select').empty();
-                                    var id = $(this).val();
-                                    $.ajax({
-                                        type: 'get',
-                                        url: "/ajaxCity",
-                                        data: {'id' : id ,
-                                                '_token' : _token},
-                                        success: function(data){
-                                            var schools = data['schools'];
-                                            delete data['schools'];
-                                            $.each(data, function(i,n) {
-                                                $('#city_select').append("<option value="+n.id+">"+n.name+"</option>");
-                                            });
-                                            $.each(schools, function(i,n) {
-                                                $('#school_select').append("<option value="+n.id+">"+n.name+"</option>");
-                                            });
-                                        },
-                                        error: function(data){
-                                            alert("fail" + ' ' +data)
-                                        },
-                                    });
-                                });
-                            });
-                        </script>
                         <div class="form-group">
                             {!! Form::label('school_id', 'School') !!}
                             <div class="form-controls">
                                 {!! Form::select('school_id', $schools, null, ['class'=>'form-control', 'id' => 'school_select']) !!}
                             </div>
                         </div>
-                        <script>
-                            $(document).ready(function() {
-                                $('#city_select').change(function() {
-                                    $('#school_select').empty();
-                                    var id = $(this).val();
-                                    var _token = $('input[name="_token"]').val();
-                                    $.ajax({
-                                        type: 'get',
-                                        url: "/ajaxSchool",
-                                        data: {'id' : id,
-                                              '_token' : _token },
-                                        success: function(data){
-                                            for (var i = 0; i < data.length; i++) {
-                                                $('#school_select').append("<option value="+data[i].id+">"+data[i].name+"</option>");
-                                            }
-                                        },
-                                        error: function(data){
-                                            alert("fail"+data)
-                                        },
-                                    });
-                                });
-                            });
-                        </script>
+                        
                         <div class="form-group">
                             {!! Form::label('graduation_year', 'Graduation Year:') !!}
                             <div class="form-controls">
-                                {{ Form::date('graduation_year', null, ['class'=>'form-control']) }}
+                                {{ Form::text('graduation_year', $candidate->graduation_year, ['class'=>'form-control']) }}
                             </div>
                         </div>
                         <div class="form-group">
                             <label >Subject Set</label>
-                            <select name="set_id" id="set_id" class="form-control">
+                            <select name="set_id" id="set_id" required class="form-control">
                                 <option value="">Choose</option>
                             </select>
                         </div>
@@ -232,8 +158,6 @@
                         {!! Form::submit('Create', ['class'=>'btn btn-primary']) !!}
                         <a href="{{ route('admin.candidates.index')}}">Cancel</a>
                     </div>
-                    
-                     
                 </div>
 
             </div>
@@ -284,10 +208,88 @@
         var result = subjects.map(function (item) {
             return `<div class="form-group">
                 <span>`+ item.name + `</span>
-                <input id="subject_id_`+ item.id +`" type="number" min="0" max="10" step="0.01" value="" name="points[`+ item.id +`]" class= "form-control"> 
+                <input id="subject_id_`+ item.id +`" type="number" min="1" max="10" step="0.01" required value="" name="points[`+ item.id +`]" class= "form-control"> 
             </div>`;
         });
         $('#subject_id').html(result);
     }
+</script>
+<script>
+    window.onload = function(){
+        var _token = $('input[name="_token"]').val();
+        $('#city_select').empty();
+        var id = $('#country_select').val();
+        $.ajax({
+            type: 'get',
+            url: "/ajaxCity",
+            data: {'id' : id ,
+                    '_token' : _token},
+            success: function(data){
+                var schools = data['schools'];
+                delete data['schools'];
+                $.each(data, function(i,n) {
+                    $('#city_select').append("<option value="+n.id+">"+n.name+"</option>");
+                });
+                $.each(schools, function(i,n) {
+                    $('#school_select').append("<option value="+n.id+">"+n.name+"</option>");
+                });
+            },
+            error: function(data){
+                alert("fail" + ' ' +data)
+            },
+        });
+    }
+</script>
+<script>
+    $(document).ready(function() {
+        var _token = $('input[name="_token"]').val();
+        $('#country_select').change(function() {
+            $('#city_select').empty();
+            $('#school_select').empty();
+            var id = $(this).val();
+            $.ajax({
+                type: 'get',
+                url: "/ajaxCity",
+                data: {'id' : id ,
+                        '_token' : _token},
+                success: function(data){
+                    var schools = data['schools'];
+                    delete data['schools'];
+                    $.each(data, function(i,n) {
+                        $('#city_select').append("<option value="+n.id+">"+n.name+"</option>");
+                    });
+                    $.each(schools, function(i,n) {
+                        $('#school_select').append("<option value="+n.id+">"+n.name+"</option>");
+                    });
+                },
+                error: function(data){
+                    alert("fail" + ' ' +data)
+                },
+            });
+        });
+    });
+</script>
+<script>
+    $(document).ready(function() {
+        $('#city_select').change(function() {
+            $('#school_select').empty();
+            var id = $(this).val();
+            var _token = $('input[name="_token"]').val();
+            $.ajax({
+                type: 'get',
+                url: "/ajaxSchool",
+                data: {'id' : id,
+                      '_token' : _token },
+                success: function(data){
+                    for (var i = 0; i < data.length; i++) {
+                        $('#school_select').append("<option value="+data[i].id+">"+data[i].name+"</option>");
+                    }
+                },
+                error: function(data){
+                    alert("fail"+data)
+                },
+            });
+        });
+    });
 </script>
 @endsection

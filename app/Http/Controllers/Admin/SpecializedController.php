@@ -21,12 +21,13 @@ class SpecializedController extends Controller
         return view('admin.specializeds.create')->with('branches', $branches);
     }
 
-    public function store(Request $request)
+    public function store(Branch $id, Request $request)
     {
+        $branch = Branch::findOrFail($id);
         $this->validate($request, [
         	'specialized_code' => 'required|unique:specializeds|max:255',
             'name' => 'required|unique:specializeds|max:255',
-            'point' => 'required|numeric:specializeds|min:1|max:30',
+            'point' => 'required|numeric:specializeds|min:1|max:30|',
             'branch_id' => 'required|numeric|exists:branches,id',
         ]);
         Specialized::create($request->all());

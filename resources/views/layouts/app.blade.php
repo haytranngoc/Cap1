@@ -67,44 +67,77 @@
                                                 {{ csrf_field() }}
                                             </form>
                                         </li>
+                                        <li>
+                                            @if (Auth::check() && Auth::user()->role->name == "ADMIN")
+                                                <a href="{{ route('admin.index') }}" >Admin</a>
+                                            @endif
+                                        </li>
                                     </ul>
                                 </li>
                             @endif
                         </ul>
                     </div>
                 </div>
-            @if (!empty($types))
+            @if (!empty($categories))
                 <div class="bg-primary">
                     <div class="container">
                         <div class="collapse navbar-collapse" id="app-navbar-collapse">
                             <!-- Left Side Of Navbar -->
-                            <ul class="nav navbar-nav">
+                            <ul class="nav navbar-nav nav-pills">
                                 <li>
-                                    <a href="" style="color: white">Trang Chủ</a>
+                                    <a href="{{ route('home') }}" style="color: white">Home Page</a>
                                 </li>
-                                {{-- @foreach ($types as $type)
+                                <li>
+                                    <a href="{{ route('candidatesCreate') }}" style="color: white">Register Candidate</a>
+                                </li>
+                                @foreach ($categories as $category)
                                     <li class="dropdown">
-                                        <a href="" style="color: white">{{ $type->name }}</a>
-                                        <ul class="nav nav-pills nav-stacked">
-                                            @foreach ($type->categories as $category)
-                                                <li><a href="">{{ $category->name }}</a></li>
-                                            @endforeach
-                                        </ul>
+                                        <a href="" style="color: white">{{ $category->name }}</a>
+                                        {{-- <ul class="nav nav-pills nav-stacked">
+                                            <li><a href="">{{ $category->name }}</a></li>
+                                        </ul> --}}
                                     </li>
-                                @endforeach --}}
+                                @endforeach
+
                             </ul>
                         </div>
                     </div>
                 </div>
             @endif
             </nav>
+            {{-- <nav class="navbar navbar-inverse ">
+                <div class="container-fluid">
+                    <div class="navbar-header">
+                        <a class="navbar-brand" href="#">WebSiteName</a>
+                    </div>
+                    <ul class="nav navbar-nav">
+                        <li class="active"><a href="#">Home</a></li>
+                        <li><a href="#">Page 1</a></li>
+                        <li><a href="#">Page 2</a></li>
+                        <li><a href="#">Page 3</a></li>
+                    </ul>
+                </div>
+            </nav> --}}
         </header>
 
         @yield('content')
     </div>
 
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}"></script>
+<script src="{{ asset('js/app.js') }}"></script>
+<!--Start of Tawk.to Script-->
+<script type="text/javascript">
+var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+(function(){
+var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+s1.async=true;
+s1.src='https://embed.tawk.to/5a290118d0795768aaf8dde9/default';
+s1.charset='UTF-8';
+s1.setAttribute('crossorigin','*');
+s0.parentNode.insertBefore(s1,s0);
+})();
+</script>
+<!--End of Tawk.to Script-->
     @yield('scripts')
 </body>
 </html>

@@ -119,32 +119,7 @@
                                 {!! Form::select('country_id', $countries, null, ['class'=>'form-control', 'id' => 'country_select']) !!}
                             </div>
                         </div>
-                        <script>
-                            window.onload = function(){
-                                var _token = $('input[name="_token"]').val();
-                                $('#city_select').empty();
-                                var id = $('#country_select').val();
-                                $.ajax({
-                                    type: 'get',
-                                    url: "/ajaxCity",
-                                    data: {'id' : id ,
-                                            '_token' : _token},
-                                    success: function(data){
-                                        var schools = data['schools'];
-                                        delete data['schools'];
-                                        $.each(data, function(i,n) {
-                                            $('#city_select').append("<option value="+n.id+">"+n.name+"</option>");
-                                        });
-                                        $.each(schools, function(i,n) {
-                                            $('#school_select').append("<option value="+n.id+">"+n.name+"</option>");
-                                        });
-                                    },
-                                    error: function(data){
-                                        alert("fail" + ' ' +data)
-                                    },
-                                });
-                            }
-                        </script>
+                        
                         <div class="form-group">
                             {!! Form::label('city_id', 'City') !!}
                             <div class="form-controls">
@@ -152,68 +127,18 @@
                             </div>
                         </div>
                         <script type="text/javascript" src="http://code.jquery.com/jquery-2.1.0.min.js"></script>
-                        <script>
-                            $(document).ready(function() {
-                                var _token = $('input[name="_token"]').val();
-                                $('#country_select').change(function() {
-                                    $('#city_select').empty();
-                                    $('#school_select').empty();
-                                    var id = $(this).val();
-                                    $.ajax({
-                                        type: 'get',
-                                        url: "/ajaxCity",
-                                        data: {'id' : id ,
-                                                '_token' : _token},
-                                        success: function(data){
-                                            var schools = data['schools'];
-                                            delete data['schools'];
-                                            $.each(data, function(i,n) {
-                                                $('#city_select').append("<option value="+n.id+">"+n.name+"</option>");
-                                            });
-                                            $.each(schools, function(i,n) {
-                                                $('#school_select').append("<option value="+n.id+">"+n.name+"</option>");
-                                            });
-                                        },
-                                        error: function(data){
-                                            alert("fail" + ' ' +data)
-                                        },
-                                    });
-                                });
-                            });
-                        </script>
+                        
                         <div class="form-group">
                             {!! Form::label('school_id', 'School') !!}
                             <div class="form-controls">
                                 {!! Form::select('school_id', $schools, null, ['class'=>'form-control', 'id' => 'school_select']) !!}
                             </div>
                         </div>
-                        <script>
-                            $(document).ready(function() {
-                                $('#city_select').change(function() {
-                                    $('#school_select').empty();
-                                    var id = $(this).val();
-                                    var _token = $('input[name="_token"]').val();
-                                    $.ajax({
-                                        type: 'get',
-                                        url: "/ajaxSchool",
-                                        data: {'id' : id,
-                                              '_token' : _token },
-                                        success: function(data){
-                                            for (var i = 0; i < data.length; i++) {
-                                                $('#school_select').append("<option value="+data[i].id+">"+data[i].name+"</option>");
-                                            }
-                                        },
-                                        error: function(data){
-                                            alert("fail"+data)
-                                        },
-                                    });
-                                });
-                            });
-                        </script>
+                        
                         <div class="form-group">
                             {!! Form::label('graduation_year', 'Graduation Year:') !!}
                             <div class="form-controls">
-                                {{ Form::date('graduation_year', null, ['class'=>'form-control']) }}
+                                {{ Form::text('graduation_year', null, ['class'=>'form-control']) }}
                             </div>
                         </div>
                         <div class="form-group">
@@ -284,10 +209,88 @@
         var result = subjects.map(function (item) {
             return `<div class="form-group">
                 <span>`+ item.name + `</span>
-                <input id="subject_id_`+ item.id +`" type="number" min="0" max="10" step="0.01" value="" name="points[`+ item.id +`]" class= "form-control"> 
+                <input id="subject_id_`+ item.id +`" type="number" required min="1" max="10" step="0.01" value="" name="points[`+ item.id +`]" class= "form-control"> 
             </div>`;
         });
         $('#subject_id').html(result);
     }
+</script>
+<script>
+    window.onload = function(){
+        var _token = $('input[name="_token"]').val();
+        $('#city_select').empty();
+        var id = $('#country_select').val();
+        $.ajax({
+            type: 'get',
+            url: "/ajaxCity",
+            data: {'id' : id ,
+                    '_token' : _token},
+            success: function(data){
+                var schools = data['schools'];
+                delete data['schools'];
+                $.each(data, function(i,n) {
+                    $('#city_select').append("<option value="+n.id+">"+n.name+"</option>");
+                });
+                $.each(schools, function(i,n) {
+                    $('#school_select').append("<option value="+n.id+">"+n.name+"</option>");
+                });
+            },
+            error: function(data){
+                alert("fail" + ' ' +data)
+            },
+        });
+    }
+</script>
+<script>
+    $(document).ready(function() {
+        var _token = $('input[name="_token"]').val();
+        $('#country_select').change(function() {
+            $('#city_select').empty();
+            $('#school_select').empty();
+            var id = $(this).val();
+            $.ajax({
+                type: 'get',
+                url: "/ajaxCity",
+                data: {'id' : id ,
+                        '_token' : _token},
+                success: function(data){
+                    var schools = data['schools'];
+                    delete data['schools'];
+                    $.each(data, function(i,n) {
+                        $('#city_select').append("<option value="+n.id+">"+n.name+"</option>");
+                    });
+                    $.each(schools, function(i,n) {
+                        $('#school_select').append("<option value="+n.id+">"+n.name+"</option>");
+                    });
+                },
+                error: function(data){
+                    alert("fail" + ' ' +data)
+                },
+            });
+        });
+    });
+</script>
+<script>
+    $(document).ready(function() {
+        $('#city_select').change(function() {
+            $('#school_select').empty();
+            var id = $(this).val();
+            var _token = $('input[name="_token"]').val();
+            $.ajax({
+                type: 'get',
+                url: "/ajaxSchool",
+                data: {'id' : id,
+                      '_token' : _token },
+                success: function(data){
+                    for (var i = 0; i < data.length; i++) {
+                        $('#school_select').append("<option value="+data[i].id+">"+data[i].name+"</option>");
+                    }
+                },
+                error: function(data){
+                    alert("fail"+data)
+                },
+            });
+        });
+    });
 </script>
 @endsection

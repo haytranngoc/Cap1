@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Styles -->
@@ -45,7 +46,7 @@
                             <ul class="dropdown-menu">
                                 <li><a href="{{route('admin.roles.index') }}">Roles</a></li>
                                 <li role="separator" class="divider"></li>
-                                <li><a href="#">Users</a></li>
+                                <li><a href="{{ route('admin.users.index') }}">Users</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -69,12 +70,12 @@
                             <ul class="dropdown-menu">
                                 <li><a href="{{ route('admin.candidates.index') }}">Candidate</a></li>
                                 <li role="separator" class="divider"></li>
-                                <li><a href="{{ route('admin.candidateTypes.index') }}">Candidate Type</a></li>
+                                {{-- <li><a href="{{ route('admin.candidateTypes.index') }}">Candidate Type</a></li>
                                 <li role="separator" class="divider"></li>
                                 <li><a href="{{ route('admin.applies.index') }}">Apply Type</a></li>
                                 <li role="separator" class="divider"></li>
                                 <li><a href="{{ route('admin.areas.index') }}">Area</a></li>
-                                <li role="separator" class="divider"></li>
+                                <li role="separator" class="divider"></li> --}}
                                 <li><a href="{{ route('admin.branches.index') }}">Branch</a></li>
                                 <li role="separator" class="divider"></li>
                                 <li><a href="{{ route('admin.specializeds.index') }}">Specialized</a></li>
@@ -90,11 +91,11 @@
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Article <span class="caret"></span></a>
                             <ul class="dropdown-menu">
-                                <li><a href="#">Type</a></li>
+                                <li><a href="{{ route('admin.tags.index') }}">Tags</a></li>
                                 <li role="separator" class="divider"></li>
-                                <li><a href="#">Category</a></li>
+                                <li><a href="{{ route('admin.categories.index') }}">Category</a></li>
                                 <li role="separator" class="divider"></li>
-                                <li><a href="#">Post</a></li>
+                                <li><a href="{{ route('admin.posts.index') }}">Post</a></li>
                             </ul>
                         </li>
                     </ul>

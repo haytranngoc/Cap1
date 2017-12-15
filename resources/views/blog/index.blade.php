@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+@extends('layouts.app')
 
 @section('content')
 
@@ -23,13 +23,13 @@
 		</div>
 		@endforeach
 
-		<div class="row">
+		{{-- <div class="row">
 			<div class="col-md-12">
 				<div class="text-center">
 					{!! $posts->links() !!}
 				</div>
 			</div>
-		</div>
+		</div> --}}
 	</div>
 
 @endsection

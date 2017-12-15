@@ -131,7 +131,6 @@ Route::group($admin_config, function () {
 	Route::put('/candidates/{id}', 'CandidateController@update')->name('candidates.update');
 	Route::get('/candidates/{id}/delete', 'CandidateController@destroy')->name('candidates.destroy');
 	Route::get('/candidates/{id}', 'CandidateController@getPDF')->name('candidates.getPDF');
-	Route::post('/active', 'CandidateController@active')->name('candidates.active');
 
 
 });

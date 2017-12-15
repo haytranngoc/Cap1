@@ -14,9 +14,5 @@ class AppliesSeeder extends Seeder
         DB::table('applies')->insert([
             'name' => 'Xét kết quả thi Đại Học',
         ]);
-
-        DB::table('applies')->insert([
-            'name' => 'Xét học bạn',
-        ]);
     }
 }

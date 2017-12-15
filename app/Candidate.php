@@ -77,14 +77,4 @@ class Candidate extends Model
         }
         return "Uncofirmed";
     }
-
-    // public function active()
-    // {
-    //     $confirm = $this->getAttribute("confirm");
-    //     if($confirm = false)
-    //     {
-    //         return $confirm = true;
-    //     }
-    //     return $confirm;
-    // }
 }

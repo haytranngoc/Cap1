@@ -138,7 +138,7 @@
                         <div class="form-group">
                             {!! Form::label('graduation_year', 'Graduation Year:') !!}
                             <div class="form-controls">
-                                {{ Form::date('graduation_year', null, ['class'=>'form-control']) }}
+                                {{ Form::text('graduation_year', null, ['class'=>'form-control']) }}
                             </div>
                         </div>
                         <div class="form-group">
@@ -209,7 +209,7 @@
         var result = subjects.map(function (item) {
             return `<div class="form-group">
                 <span>`+ item.name + `</span>
-                <input id="subject_id_`+ item.id +`" type="number" min="0" max="10" step="0.01" value="" name="points[`+ item.id +`]" class= "form-control"> 
+                <input id="subject_id_`+ item.id +`" type="number" required min="1" max="10" step="0.01" value="" name="points[`+ item.id +`]" class= "form-control"> 
             </div>`;
         });
         $('#subject_id').html(result);
