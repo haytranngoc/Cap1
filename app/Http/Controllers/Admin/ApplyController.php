@@ -25,7 +25,7 @@ class ApplyController extends Controller
             'name' => 'required|unique:applies|max:255',
         ]);
         Apply::create($request->all());
-        return redirect()->route('adminApplies');
+        return redirect()->route('admin.applies.index');
     }
 
     public function edit($id)
@@ -41,12 +41,12 @@ class ApplyController extends Controller
         ]);
         $apply = Apply::findOrFail($id);
         $apply->update($request->all());
-        return redirect()->route('adminApplies');
+        return redirect()->route('admin.applies.index');
     }
     
     public function destroy($id)
     {
         Apply::destroy($id);
-        return redirect()->route('adminApplies');
+        return redirect()->route('admin.applies.index');
     }
 }

@@ -17,7 +17,7 @@
                             </ul>
                         </div>
                     @endif
-                    {{ Form::open(['route'=>'adminSubjectsStore']) }}
+                    {{ Form::open(['route'=>'admin.subjects.store']) }}
                         <div class="form-group">
                             {!! Form::label('name', 'Subject Name:') !!}
                             <div class="form-controls">
@@ -25,7 +25,7 @@
                             </div>
                         </div>
                         {!! Form::submit('Save', ['class'=>'btn btn-primary']) !!}
-                        <a href="{{ route('adminSubjects')}}">Cancel</a>
+                        <a href="{{ route('admin.subjects.index')}}">Cancel</a>
                     {{Form::close()}}
                 </div>
             </div>

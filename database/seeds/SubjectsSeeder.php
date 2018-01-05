@@ -12,19 +12,37 @@ class SubjectsSeeder extends Seeder
     public function run()
     {
         // DB::table('subject')->insert([
-        //     'name' => 'Maths',
+        //     'name' => 'Toán',
+            
         // ]);
 
         // DB::table('subject')->insert([
-        //     'name' => 'Physics',
+        //     'name' => 'Lý',
         // ]);
 
         // DB::table('subject')->insert([
-        //     'name' => 'Chemistry',
+        //     'name' => 'Hóa',
         // ]);
 
         // DB::table('subject')->insert([
-        //     'name' => 'Biology',
+        //     'name' => 'Sinh',
         // ]);
+
+        // DB::table('subject')->insert([
+        //     'name' => 'Văn',
+        // ]);
+
+        // DB::table('subject')->insert([
+        //     'name' => 'Anh',
+        // ]);
+
+        // DB::table('subject')->insert([
+        //     'name' => 'Sử',
+        // ]);
+
+        // DB::table('subject')->insert([
+        //     'name' => 'Địa',
+        // ]);
+
     }
 }

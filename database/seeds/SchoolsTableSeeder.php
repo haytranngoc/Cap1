@@ -12,27 +12,27 @@ class SchoolsTableSeeder extends Seeder
     public function run()
     {
         DB::table('schools')->insert([
-            'ward_id' => 1,
+            'city_id' => 1,
             'name' => 'THPT Thai Phien',
         ]);
 
         DB::table('schools')->insert([
-            'ward_id' => 1,
+            'city_id' => 1,
             'name' => 'TT GD TX',
         ]);
 
         DB::table('schools')->insert([
-            'ward_id' => 2,
+            'city_id' => 1,
             'name' => 'THPT Tran Phu',
         ]);
 
         DB::table('schools')->insert([
-            'ward_id' => 3,
+            'city_id' => 2,
             'name' => 'THPT Bui Thi Xuan',
         ]);
 
         DB::table('schools')->insert([
-            'ward_id' => 3,
+            'city_id' => 3,
             'name' => 'THPT Trung Vuong',
         ]);
     }

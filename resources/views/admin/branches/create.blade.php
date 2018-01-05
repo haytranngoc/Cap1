@@ -17,7 +17,7 @@
                             </ul>
                         </div>
                     @endif
-                    {{ Form::open(['route' => 'adminBranchesStore']) }}
+                    {{ Form::open(['route' => 'admin.branches.store']) }}
                         <div class="form-group">
                             {!! Form::label('branch_code', 'Branch Code:') !!}
                             <div class="form-controls">
@@ -31,6 +31,12 @@
                             </div>
                         </div>
                         <div class="form-group">
+                            {!! Form::label('point', 'Point:') !!}
+                            <div class="form-controls">
+                                {{ Form::text('point', null, ['class'=>'form-control']) }}
+                            </div>
+                        </div>
+                        <div class="form-group">
                             {!! Form::label('sets', 'Subject Set:') !!}
                             <div class="form-controls">
                                 {{ Form::select('sets[]', $sets, null, ['id' => 'sets', 'multiple' => 'multiple', 'class'=>'form-control']) }}
@@ -38,7 +44,7 @@
                         </div>
                         
                         {!! Form::submit('Create', ['class'=>'btn btn-primary']) !!}
-                        <a href="{{ route('adminBranches')}}">Cancel</a>
+                        <a href="{{ route('admin.branches.index')}}">Cancel</a>
                     {{Form::close()}}
                 </div>
             </div>

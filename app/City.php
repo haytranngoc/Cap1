@@ -8,9 +8,9 @@ class City extends Model
 {
     protected $fillable = ['name', 'country_id'];
 
-    public function wards()
+    public function schools()
     {
-        return $this->hasMany('App\Ward');
+        return $this->hasMany('App\School');
     }
 
     public function country()

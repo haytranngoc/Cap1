@@ -17,7 +17,7 @@
                             </ul>
                         </div>
                     @endif
-                    {{ Form::open(['route' => 'adminSchoolsStore']) }}
+                    {{ Form::open(['route' => 'admin.schools.store']) }}
                         <div class="form-group">
                             {!! Form::label('name', 'School Name:') !!}
                             <div class="form-controls">
@@ -27,7 +27,7 @@
                         <div class="form-group">
                             {!! Form::label('country_id', 'Country') !!}
                             <div class="form-controls">
-                                {{ Form::select('country_id', $countries, '10', ['class'=>'form-control', 'id' => 'country_select']) }}
+                                {{ Form::select('country_id', $countries, null, ['class'=>'form-control', 'id' => 'country_select']) }}
                             </div>
                         </div>
                         <script>
@@ -41,13 +41,13 @@
                                     data: {'id' : id ,
                                             '_token' : _token},
                                     success: function(data){
-                                        var wards = data['wards'];
-                                        delete data['wards'];
+                                        var schools = data['schools'];
+                                        delete data['schools'];
                                         $.each(data, function(i,n) {
                                             $('#city_select').append("<option value="+n.id+">"+n.name+"</option>");
                                         });
-                                        $.each(wards, function(i,n) {
-                                            $('#ward_select').append("<option value="+n.id+">"+n.name+"</option>");
+                                        $.each(schools, function(i,n) {
+                                            $('#school_select').append("<option value="+n.id+">"+n.name+"</option>");
                                         });
                                     },
                                     error: function(data){
@@ -68,7 +68,7 @@
                                 var _token = $('input[name="_token"]').val();
                                 $('#country_select').change(function() {
                                     $('#city_select').empty();
-                                    $('#ward_select').empty();
+                                    $('#school_select').empty();
                                     var id = $(this).val();
                                     $.ajax({
                                         type: 'get',
@@ -76,13 +76,13 @@
                                         data: {'id' : id ,
                                                 '_token' : _token},
                                         success: function(data){
-                                            var wards = data['wards'];
-                                            delete data['wards'];
+                                            var schools = data['schools'];
+                                            delete data['schools'];
                                             $.each(data, function(i,n) {
                                                 $('#city_select').append("<option value="+n.id+">"+n.name+"</option>");
                                             });
-                                            $.each(wards, function(i,n) {
-                                                $('#ward_select').append("<option value="+n.id+">"+n.name+"</option>");
+                                            $.each(schools, function(i,n) {
+                                                $('#school_select').append("<option value="+n.id+">"+n.name+"</option>");
                                             });
                                         },
                                         error: function(data){
@@ -92,38 +92,9 @@
                                 });
                             });
                         </script>
-                        <div class="form-group">
-                            {!! Form::label('ward_id', 'Ward') !!}
-                            <div class="form-controls">
-                                {{ Form::select('ward_id', [], null, ['class'=>'form-control', 'id' => 'ward_select']) }}
-                            </div>
-                        </div>
-                        <script>
-                            $(document).ready(function() {
-                                $('#city_select').change(function() {
-                                    $('#ward_select').empty();
-                                    var id = $(this).val();
-                                    var _token = $('input[name="_token"]').val();
-                                    $.ajax({
-                                        type: 'get',
-                                        url: "/ajaxWard",
-                                        data: {'id' : id,
-                                              '_token' : _token },
-                                        success: function(data){
-                                            for (var i = 0; i < data.length; i++) {
-                                                $('#ward_select').append("<option value="+data[i].id+">"+data[i].name+"</option>");
-                                            }
-                                        },
-                                        error: function(data){
-                                            alert("fail"+data)
-                                        },
-                                    });
-                                });
-                            });
-                        </script>
 
                         {!! Form::submit('Create', ['class'=>'btn btn-primary']) !!}
-                        <a href="{{ route('adminSchools')}}">Cancel</a>
+                        <a href="{{ route('admin.schools.index')}}">Cancel</a>
                     {{Form::close()}}
                 </div>
             </div>

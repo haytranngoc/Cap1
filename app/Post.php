@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Post extends Model
 {
-    protected $fillable = ['title', 'content', 'category_id'];
+    protected $fillable = ['title', 'body', 'category_id', 'slug', 'category_id'];
 
     public function category()
     {
@@ -16,5 +16,10 @@ class Post extends Model
     public function postImages()
     {
     	return $this->hasMany('App\PostImage');
+    }
+
+    public function tags()
+    {
+    	return $this->belongsToMany('App\Tag');
     }
 }

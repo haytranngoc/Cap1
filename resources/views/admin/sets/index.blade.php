@@ -7,7 +7,7 @@
             <div class="panel panel-default">
                 <div class="panel-heading">
                     List of sets
-                    <div class="pull-right"><a href="{{ route('adminSetsCreate') }}"><button class="btn btn-xs btn-primary">Create new set</button></a></div>
+                    <div class="pull-right"><a href="{{ route('admin.sets.create') }}"><button class="btn btn-xs btn-primary">Create new set</button></a></div>
                 </div>
 
                 <div class="panel-body">
@@ -31,8 +31,8 @@
                                         @endforeach
                                     </td>
                                     <td class="text-right">
-                                        <a href="{{ route('adminSetsEdit', ['id' => $set->id] ) }}"><button class="btn btn-xs btn-primary">Edit</button></a>
-                                        <a href="{{ route('adminSetsDelete', ['id' => $set->id] ) }}" ><button class="btn btn-xs btn-danger">Delete</button></a>
+                                        <a href="{{ route('admin.sets.edit', ['id' => $set->id] ) }}"><button class="btn btn-xs btn-primary">Edit</button></a>
+                                        <a href="{{ route('admin.sets.destroy', ['id' => $set->id] ) }}" ><button class="btn btn-xs btn-danger">Delete</button></a>
                                     </td>
                                 </tr>
                             @endforeach

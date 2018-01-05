@@ -7,7 +7,7 @@
             <div class="panel panel-default">
                 <div class="panel-heading">
                     List of Candidate Type
-                    <div class="pull-right"><a href="{{ route('adminCandidateTypesCreate') }}"><button class="btn btn-xs btn-primary">Create new Candidate Type</button></a></div>
+                    <div class="pull-right"><a href="{{ route('admin.candidateTypes.create') }}"><button class="btn btn-xs btn-primary">Create new Candidate Type</button></a></div>
                 </div>
 
                 <div class="panel-body">
@@ -27,8 +27,8 @@
                                     <td>{{ $candidateType->name }}</td>
                                     <td>{{ $candidateType->bonus_point }}</td>
                                     <td class="text-right">
-                                        <a href="{{ route('adminCandidateTypesEdit', ['id' => $candidateType->id] ) }}"><button class="btn btn-xs btn-primary">Edit</button></a>
-                                        <a href="{{ route('adminCandidateTypesDelete', ['id' => $candidateType->id] ) }}" ><button class="btn btn-xs btn-danger">Delete</button></a>
+                                        <a href="{{ route('admin.candidateTypes.edit', ['id' => $candidateType->id] ) }}"><button class="btn btn-xs btn-primary">Edit</button></a>
+                                        <a href="{{ route('admin.candidateTypes.destroy', ['id' => $candidateType->id] ) }}" ><button class="btn btn-xs btn-danger">Delete</button></a>
                                     </td>
                                 </tr>
                             @endforeach

@@ -16,7 +16,7 @@
                             </ul>
                         </div>
                     @endif
-                    {{ Form::open(['route' => ['adminCandidateTypesUpdate', $candidateType->id], 'method' => 'put']) }}
+                    {{ Form::open(['route' => ['admin.candidateTypes.update', $candidateType->id], 'method' => 'put']) }}
                         <div class="form-group">
                             {!! Form::label('name', 'Candidate Type Name:') !!}
                             <div class="form-controls">
@@ -30,7 +30,7 @@
                             </div>
                         </div>
                         {{ Form::submit('Update', ['class'=>'btn btn-primary']) }}
-                        <a href="{{ route('adminCandidateTypes')}}">Cancel</a>
+                        <a href="{{ route('admin.candidateTypes.index')}}">Cancel</a>
                     {{Form::close()}}
                 </div>
             </div>

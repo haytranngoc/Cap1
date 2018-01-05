@@ -19,12 +19,12 @@ class CreateCandidatesTable extends Migration
             $table->string('first_name')->nullable();
             $table->string('last_name')->nullable();
             $table->string('email')->unique();
-            $table->bigInteger('phone_number');
+            $table->string('phone_number');
             $table->bigInteger('numbers_cmnd')->unique();
-            $table->date('graduation_year')->nullable();
+            $table->string('graduation_year')->nullable();
             $table->date('date_of_birth');
             $table->string('address')->nullable();
-            $table->unsignedInteger('confirm_id');
+            $table->boolean('confirm')->default(false);
             $table->unsignedInteger('apply_id');
             $table->unsignedInteger('candidate_type_id');
             $table->unsignedInteger('area_id');

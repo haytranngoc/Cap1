@@ -25,7 +25,7 @@ class CountryController extends Controller
             'name' => 'required|unique:countries|max:255',
         ]);
         Country::create($request->all());
-        return redirect()->route('adminCountries');
+        return redirect()->route('admin.countries.index');
     }
 
     public function edit($id)
@@ -41,19 +41,24 @@ class CountryController extends Controller
         ]);
         $country = Country::findOrFail($id);
         $country->update($request->all());
-        return redirect()->route('adminCountries');
+        return redirect()->route('admin.countries.index');
+    }
+
+    public function show()
+    {
+        
     }
     
     public function destroy($id)
     {
         Country::destroy($id);
-        return redirect()->route('adminCountries');
+        return redirect()->route('admin.countries.index');
     }
 
-    /*public function select(Request $request)
-    {
-        $countries = Country::all();
-        return $countries;
-    }*/
+    // public function select(Request $request)
+    // {
+    //     $countries = Country::all();
+    //     return $countries;
+    // }
 
 }

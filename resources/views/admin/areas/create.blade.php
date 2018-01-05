@@ -17,7 +17,7 @@
                             </ul>
                         </div>
                     @endif
-                    {{ Form::open(['route' => 'adminAreasStore']) }}
+                    {{ Form::open(['route' => 'admin.areas.store']) }}
                         <div class="form-group">
                             {!! Form::label('name', 'Area Name:') !!}
                             <div class="form-controls">
@@ -31,7 +31,7 @@
                             </div>
                         </div>
                         {!! Form::submit('Create', ['class'=>'btn btn-primary']) !!}
-                        <a href="{{ route('adminAreas')}}">Cancel</a>
+                        <a href="{{ route('admin.areas.index')}}">Cancel</a>
                     {{Form::close()}}
                 </div>
             </div>

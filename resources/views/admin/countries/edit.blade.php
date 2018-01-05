@@ -16,7 +16,7 @@
                             </ul>
                         </div>
                     @endif
-                    {{ Form::open(['route' => ['adminCountriesUpdate', $country->id], 'method' => 'put']) }}
+                    {{ Form::open(['route' => ['admin.countries.update', $country->id], 'method' => 'put']) }}
                         <div class="form-group">
                             {!! Form::label('name', 'Country Name:') !!}
                             <div class="form-controls">
@@ -24,7 +24,7 @@
                             </div>
                         </div>
                         {{ Form::submit('Update', ['class'=>'btn btn-primary']) }}
-                        <a href="{{ route('adminCountries')}}">Cancel</a>
+                        <a href="{{ route('admin.countries.index')}}">Cancel</a>
                     {{Form::close()}}
                 </div>
             </div>

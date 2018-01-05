@@ -6,11 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class School extends Model
 {
-    protected $fillable = ['name', 'ward_id'];
+    protected $fillable = ['name', 'city_id'];
 
-    public function ward()
+    public function city()
     {
-    	return $this->belongsTo('App\Ward');
+    	return $this->belongsTo('App\City');
     }
 
     public function candidates()

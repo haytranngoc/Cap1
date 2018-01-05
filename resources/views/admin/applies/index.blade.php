@@ -7,7 +7,7 @@
             <div class="panel panel-default">
                 <div class="panel-heading">
                     List of applies
-                    <div class="pull-right"><a href="{{ route('adminAppliesCreate') }}"><button class="btn btn-xs btn-primary">Create new apply</button></a></div>
+                    <div class="pull-right"><a href="{{ route('admin.applies.create') }}"><button class="btn btn-xs btn-primary">Create new apply</button></a></div>
                 </div>
 
                 <div class="panel-body">
@@ -25,8 +25,8 @@
                                     <td>{{ $index + 1 }}</td>
                                     <td>{{ $apply->name }}</td>
                                     <td class="text-right">
-                                        <a href="{{ route('adminAppliesEdit', ['id' => $apply->id] ) }}"><button class="btn btn-xs btn-primary">Edit</button></a>
-                                        <a href="{{ route('adminAppliesDelete', ['id' => $apply->id] ) }}" ><button class="btn btn-xs btn-danger">Delete</button></a>
+                                        <a href="{{ route('admin.applies.edit', ['id' => $apply->id] ) }}"><button class="btn btn-xs btn-primary">Edit</button></a>
+                                        <a href="{{ route('admin.applies.destroy', ['id' => $apply->id] ) }}" ><button class="btn btn-xs btn-danger">Delete</button></a>
                                     </td>
                                 </tr>
                             @endforeach

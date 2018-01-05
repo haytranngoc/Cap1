@@ -21,15 +21,17 @@ class SpecializedController extends Controller
         return view('admin.specializeds.create')->with('branches', $branches);
     }
 
-    public function store(Request $request)
+    public function store(Branch $id, Request $request)
     {
+        $branch = Branch::findOrFail($id);
         $this->validate($request, [
         	'specialized_code' => 'required|unique:specializeds|max:255',
             'name' => 'required|unique:specializeds|max:255',
+            'point' => 'required|numeric:specializeds|min:1|max:30|',
             'branch_id' => 'required|numeric|exists:branches,id',
         ]);
         Specialized::create($request->all());
-        return redirect()->route('adminSpecializeds');
+        return redirect()->route('admin.specializeds.index');
     }
 
     public function edit($id)
@@ -44,16 +46,17 @@ class SpecializedController extends Controller
         $this->validate($request, [
         	'specialized_code' => 'required|unique:specializeds,specialized_code,'.$id,
             'name' => 'required|unique:specializeds,name,'.$id,
+            'point' => 'required|numeric:specializeds|min:1|max:30,point,'.$id,
             'branch_id' => 'required|numeric|exists:branches,id',
         ]);
         $specialized = Specialized::findOrFail($id);
         $specialized->update($request->all());
-        return redirect()->route('adminSpecializeds');
+        return redirect()->route('admin.specializeds.index');
     }
     
     public function destroy($id)
     {
         Specialized::destroy($id);
-        return redirect()->route('adminSpecializeds');
+        return redirect()->route('admin.specializeds.index');
     }
 }
